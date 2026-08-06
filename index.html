@@ -1,0 +1,1285 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0A1512;
+    --surface:#10201B;
+    --surface-2:#16281F;
+    --surface-3:#0D1B16;
+    --border:#233A31;
+    --text:#EDF2EE;
+    --text-dim:#8CA398;
+    --text-dimmer:#5C7268;
+    --accent:#2FE0B8;
+    --accent-dim:#1B7A63;
+    --z1:#34C77B;
+    --z2:#3E8EDE;
+    --z3:#E8C547;
+    --z4:#E8873E;
+    --z5:#E14F3D;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:transparent;color:var(--text);font-family:'Inter',sans-serif;}
+  .wrap{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px 28px 34px;max-width:1180px;margin:0 auto;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .display{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:0.02em;}
+
+  /* header */
+  .header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;}
+  .title{font-size:30px;margin:0;color:var(--text);}
+  .subtitle{font-size:13px;color:var(--text-dim);margin:4px 0 0;}
+
+  .pulse{width:100%;height:34px;margin:18px 0 20px;overflow:hidden;}
+  .pulse svg{width:100%;height:100%;display:block;}
+  .pulse path{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:0.55;
+    stroke-dasharray:900;stroke-dashoffset:900;animation:draw 3.2s ease-out forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  /* weekly overview */
+  .weeksec{margin-bottom:24px;}
+  .weeksec-head{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;}
+  .weeksec-head h2{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-dim);margin:0;}
+  .weeksec-head .line{flex:1;height:1px;background:var(--border);}
+  .weekgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;}
+  .weekcard{background:linear-gradient(180deg,var(--surface-2),var(--surface));border:1px solid var(--border);border-radius:var(--radius);padding:16px;}
+  .weekcard.current{border-color:var(--accent-dim);}
+  .weekcard-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+  .weekcard-range{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:16px;}
+  .weekcard-count{font-size:11px;color:var(--text-dim);}
+  .weekcard-stats{display:flex;gap:18px;margin-bottom:12px;}
+  .weekcard-stat .n{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;}
+  .weekcard-stat .l{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em;}
+  .weekcard-zonebar{display:flex;height:14px;border-radius:5px;overflow:hidden;border:1px solid var(--border);margin-bottom:8px;}
+  .weekcard-dates{font-size:11px;color:var(--text-dimmer);}
+
+  /* tabs */
+  .tabbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
+  .tab{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.03em;background:var(--surface);
+    border:1px solid var(--border);color:var(--text-dim);padding:9px 16px;border-radius:8px;cursor:pointer;transition:all .15s ease;text-align:left;line-height:1.2;}
+  .tab .tab-sub{display:block;font-family:'JetBrains Mono',monospace;font-weight:400;font-size:9px;color:var(--text-dimmer);letter-spacing:0.03em;text-transform:none;margin-top:2px;}
+  .tab:hover{border-color:var(--accent-dim);color:var(--text);}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#06231C;}
+  .tab.active .tab-sub{color:#0C4536;}
+  .tab-add{margin-left:auto;background:transparent;border:1px dashed var(--text-dimmer);color:var(--text-dim);}
+  .tab-add:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* stat strip */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:12px;margin-bottom:20px;}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;}
+  .stat-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin:0 0 6px;}
+  .stat-value{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--text);line-height:1;}
+  .stat-unit{font-size:12px;color:var(--text-dimmer);margin-left:3px;}
+  .stat-scale{font-size:10px;color:var(--text-dimmer);margin-top:4px;}
+  .te-minor{color:var(--z2);} .te-maintain{color:var(--z3);} .te-improve{color:var(--z1);} .te-highimprove{color:var(--accent);}
+
+  /* alerts */
+  .alerts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .alert-chip{display:flex;align-items:center;gap:8px;background:rgba(225,79,61,0.08);border:1px solid rgba(225,79,61,0.35);
+    border-radius:8px;padding:7px 12px;font-size:12.5px;}
+  .alert-dot{width:6px;height:6px;border-radius:50%;background:var(--z5);flex:none;}
+  .alert-name{font-weight:600;}
+  .alert-delta{font-family:'JetBrains Mono',monospace;color:var(--text-dim);}
+  .alert-delta b{color:var(--z5);}
+
+  /* section */
+  .section{margin-bottom:24px;}
+  .section-title{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--text-dim);margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+  /* zone bar */
+  .zonebar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--border);}
+  .zoneseg{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#06110D;font-weight:700;white-space:nowrap;}
+  .zonelegend{display:flex;gap:18px;margin-top:10px;flex-wrap:wrap;}
+  .zli{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim);}
+  .zsw{width:10px;height:10px;border-radius:3px;flex:none;}
+
+  /* two-col */
+  .twocol{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;}
+  @media(max-width:840px){.twocol{grid-template-columns:1fr;}}
+
+  .posbar-row{display:grid;grid-template-columns:34px 1fr 44px;align-items:center;gap:10px;margin-bottom:9px;font-size:12px;}
+  .posbar-track{background:var(--surface-2);border-radius:5px;height:10px;overflow:hidden;}
+  .posbar-fill{height:100%;border-radius:5px;}
+  .posgroup{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;}
+  .posgroup h4{margin:0 0 12px;font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+
+  .trendwrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;}
+
+  /* table */
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  thead th{text-align:left;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.04em;
+    text-transform:uppercase;color:var(--text-dim);padding:8px 10px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap;}
+  thead th:hover{color:var(--accent);}
+  thead th.sorted{color:var(--accent);}
+  tbody td{padding:8px 10px;border-bottom:1px solid rgba(35,58,49,0.5);}
+  tbody tr:hover{background:rgba(255,255,255,0.02);}
+  td.num{font-family:'JetBrains Mono',monospace;text-align:right;}
+  .heatcell{border-radius:4px;padding:2px 8px;display:inline-block;min-width:44px;text-align:right;}
+  .rank{color:var(--text-dimmer);font-family:'JetBrains Mono',monospace;font-size:11px;}
+
+  /* trend badges */
+  .trend-badge{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:5px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
+  .trend-spike{background:rgba(225,79,61,0.14);color:var(--z5);}
+  .trend-drop{background:rgba(62,142,222,0.14);color:var(--z2);}
+  .trend-normal{background:transparent;color:var(--text-dimmer);}
+  .trend-new{background:transparent;color:var(--text-dimmer);font-style:italic;font-weight:400;}
+
+  .flags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .flag-chip{display:flex;align-items:center;gap:8px;border-radius:8px;padding:7px 12px;font-size:12.5px;border:1px solid;}
+  .flag-chip.spike{background:rgba(225,79,61,0.08);border-color:rgba(225,79,61,0.35);}
+  .flag-chip.drop{background:rgba(62,142,222,0.08);border-color:rgba(62,142,222,0.35);}
+  .flag-name{font-weight:600;}
+  .flag-detail{font-family:'JetBrains Mono',monospace;color:var(--text-dim);}
+  .flag-chip.spike .flag-detail b{color:var(--z5);}
+  .flag-chip.drop .flag-detail b{color:var(--z2);}
+
+  .tab-fitness{border-color:var(--accent-dim);}
+  .fitgroup-label{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em;margin:20px 0 10px;}
+  .fitgroup-label:first-child{margin-top:0;}
+  .dnr{color:var(--text-dimmer);font-style:italic;}
+  .vo2cell{font-family:'JetBrains Mono',monospace;font-weight:700;}
+  .fit-note{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;font-size:12px;color:var(--text-dim);line-height:1.6;margin-bottom:20px;}
+  .epoc-cell{font-family:'JetBrains Mono',monospace;text-align:right;color:var(--text-dim);}
+
+  .footer-note{font-size:11px;color:var(--text-dimmer);margin-top:18px;line-height:1.6;}
+
+  /* add session modal */
+  .modal-overlay{position:fixed;inset:0;background:rgba(3,10,8,0.72);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;max-width:640px;width:100%;max-height:86vh;overflow:auto;}
+  .modal h3{font-family:'Rajdhani',sans-serif;margin:0 0 4px;font-size:20px;}
+  .modal p.hint{color:var(--text-dim);font-size:12px;margin:0 0 18px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+  .field-row.three{grid-template-columns:1fr 1fr 1fr;}
+  label{display:block;font-size:11px;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;}
+  input[type=text],input[type=number],input[type=date],textarea{width:100%;background:var(--surface-2);border:1px solid var(--border);
+    color:var(--text);border-radius:6px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:13px;}
+  textarea{font-family:'JetBrains Mono',monospace;font-size:12px;min-height:110px;resize:vertical;}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent);}
+  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;}
+  .btn{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;padding:9px 18px;border-radius:7px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-dim);}
+  .btn:hover{color:var(--text);}
+  .btn-primary{background:var(--accent);border-color:var(--accent);color:#06231C;}
+  .btn-primary:hover{color:#06231C;filter:brightness(1.08);}
+  .btn-danger{color:var(--z5);border-color:rgba(225,79,61,0.4);}
+</style>
+
+<div class="wrap">
+  <div class="header">
+    <div>
+      <p class="eyebrow">Cleveland State WSOC &middot; Firstbeat Internal Load</p>
+      <h1 class="title display">Load Room</h1>
+      <p class="subtitle">Session-by-session heart rate load tracking for coaching staff</p>
+    </div>
+  </div>
+
+  <div class="pulse"><svg viewBox="0 0 800 34" preserveAspectRatio="none">
+    <path d="M0,17 L220,17 L245,4 L262,30 L280,10 L296,17 L520,17 L545,4 L562,30 L580,10 L596,17 L800,17"/>
+  </svg></div>
+
+  <div class="weeksec" id="weekSection"></div>
+
+  <div class="tabbar" id="tabbar"></div>
+
+  <div id="content"></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 class="display">Add a session</h3>
+    <p class="hint">Enter the team-level numbers from the Firstbeat report, then paste athlete rows (one per line: <span class="mono">Name, TRIMP, Aerobic TE, Anaerobic TE</span>). Sessions are found by date, so date is required.</p>
+
+    <div class="field-row three">
+      <div><label>Date</label><input type="date" id="f-date"></div>
+      <div><label>Report name <span style="opacity:.6">(optional)</span></label><input type="text" id="f-reporttitle" placeholder="Day 3"></div>
+      <div><label>Sport</label><input type="text" id="f-sport" placeholder="Football"></div>
+    </div>
+    <div class="field-row three">
+      <div><label>Athletes</label><input type="number" id="f-athletes"></div>
+      <div><label>Duration (H:MM:SS)</label><input type="text" id="f-duration" placeholder="01:44:44"></div>
+      <div><label>Type</label><input type="text" id="f-type" placeholder="Training"></div>
+    </div>
+    <div class="field-row three">
+      <div style="display:flex;align-items:center;gap:8px;padding-top:18px;">
+        <input type="checkbox" id="f-isgame" style="width:auto;accent-color:var(--accent);">
+        <label style="margin:0;text-transform:none;font-size:12px;color:var(--text);" for="f-isgame">This is a game</label>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding-top:18px;">
+        <input type="checkbox" id="f-istaper" style="width:auto;accent-color:var(--accent);">
+        <label style="margin:0;text-transform:none;font-size:12px;color:var(--text);" for="f-istaper">Taper / recovery day</label>
+      </div>
+    </div>
+    <div class="field-row three">
+      <div><label>Team TRIMP</label><input type="number" id="f-trimp"></div>
+      <div><label>Aerobic TE</label><input type="number" step="0.1" id="f-ate"></div>
+      <div><label>Anaerobic TE</label><input type="number" step="0.1" id="f-ante"></div>
+    </div>
+    <div class="field-row" style="grid-template-columns:repeat(5,1fr)">
+      <div><label>Z5 %</label><input type="number" id="f-z5"></div>
+      <div><label>Z4 %</label><input type="number" id="f-z4"></div>
+      <div><label>Z3 %</label><input type="number" id="f-z3"></div>
+      <div><label>Z2 %</label><input type="number" id="f-z2"></div>
+      <div><label>Z1 %</label><input type="number" id="f-z1"></div>
+    </div>
+    <div>
+      <label>Athlete rows (CSV, one per line)</label>
+      <textarea id="f-athleterows" placeholder="Sophia Auzenne, 264, 4.7, 3.1&#10;Olivia Lewis, 272, 4.7, 3.6"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="btnCancel">Cancel</button>
+      <button class="btn btn-primary" id="btnSave">Save session</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const ZONE_META = {
+    Z5:{color:'var(--z5)', label:'High intensity training'},
+    Z4:{color:'var(--z4)', label:'Anaerobic threshold zone'},
+    Z3:{color:'var(--z3)', label:'Aerobic zone 2'},
+    Z2:{color:'var(--z2)', label:'Aerobic zone 1'},
+    Z1:{color:'var(--z1)', label:'Recovery training'},
+  };
+  const ZONE_ORDER = ['Z5','Z4','Z3','Z2','Z1'];
+
+  const seedSessions = [
+    {
+      id:'2026-07-22', date:'2026-07-22', reportTitle:'Day One', sport:'Not defined', athletes:19,
+      start:'7:56:28 AM', end:'10:33:56 AM', duration:'02:37:28', type:'Training',
+      team:{trimp:228, ate:4.1, ante:3.1},
+      zones:[{z:'Z5',seconds:1003,pct:11},{z:'Z4',seconds:1680,pct:18},{z:'Z3',seconds:1515,pct:16},{z:'Z2',seconds:2604,pct:28},{z:'Z1',seconds:1871,pct:20}],
+      positions:[{pos:'CB',trimp:205,ate:3.8,ante:2.8},{pos:'AM',trimp:231,ate:4.2,ante:3.3},{pos:'CF',trimp:234,ate:3.9,ante:2.8},{pos:'DM',trimp:247,ate:4.3,ante:3.5}],
+      alerts:[{name:'Sophia Auzenne',from:188,to:189},{name:'Olivia Lewis',from:198,to:201},{name:'Shanti Atkins',from:198,to:202},{name:'Lauryn Hancock',from:198,to:210}],
+      roster:[
+        {name:'Kyleigh Bathe',trimp:33,ate:2.0,ante:2.2,epoc:22,moveload:76},
+        {name:'True Benshoff',trimp:150,ate:2.9,ante:2.6,epoc:64,moveload:265},
+        {name:'Ava Gzym',trimp:193,ate:4.0,ante:3.6,epoc:121,moveload:152},
+        {name:'Carly Stinson',trimp:193,ate:3.4,ante:2.0,epoc:83,moveload:296},
+        {name:'Sophie Abbott',trimp:211,ate:3.9,ante:3.0,epoc:108,moveload:253},
+        {name:'Ruari Dever',trimp:213,ate:4.0,ante:3.2,epoc:123,moveload:249},
+        {name:'Valentina Barrera',trimp:225,ate:4.2,ante:4.0,epoc:129,moveload:254},
+        {name:'Alicia Rierbich',trimp:231,ate:4.1,ante:3.3,epoc:120,moveload:315},
+        {name:'Sidney Nicholas',trimp:232,ate:4.4,ante:3.5,epoc:140,moveload:290},
+        {name:'Olivia Cruz',trimp:250,ate:4.2,ante:3.3,epoc:117,moveload:314},
+        {name:'Ryleigh Alcala',trimp:254,ate:4.4,ante:3.7,epoc:121,moveload:245},
+        {name:'Nikki Miskovic',trimp:258,ate:4.4,ante:3.4,epoc:109,moveload:280},
+        {name:'Lauryn Hancock',trimp:259,ate:4.5,ante:3.9,epoc:114,moveload:248},
+        {name:'Sophia Auzenne',trimp:264,ate:4.7,ante:3.1,epoc:145,moveload:276},
+        {name:'Elise Boyd',trimp:267,ate:4.1,ante:2.3,epoc:130,moveload:297},
+        {name:'Emilee Tonkovich',trimp:270,ate:4.6,ante:3.1,epoc:150,moveload:247},
+        {name:'Cortlyn Hefty',trimp:270,ate:4.1,ante:2.3,epoc:124,moveload:257},
+        {name:'Olivia Lewis',trimp:272,ate:4.7,ante:3.6,epoc:132,moveload:319},
+        {name:'Shanti Atkins',trimp:282,ate:4.8,ante:3.5,epoc:146,moveload:219},
+      ]
+    },
+    {
+      id:'2026-07-23', date:'2026-07-23', reportTitle:'Day 2', sport:'Football', athletes:16,
+      start:'8:05:09 AM', end:'9:49:53 AM', duration:'01:44:44', type:'Training',
+      team:{trimp:134, ate:3.3, ante:2.7},
+      zones:[{z:'Z5',seconds:373,pct:6},{z:'Z4',seconds:1234,pct:20},{z:'Z3',seconds:1174,pct:19},{z:'Z2',seconds:1403,pct:22},{z:'Z1',seconds:1367,pct:22}],
+      positions:[{pos:'CB',trimp:100,ate:2.8,ante:2.0},{pos:'AM',trimp:129,ate:3.2,ante:2.7},{pos:'CF',trimp:147,ate:3.4,ante:2.5},{pos:'DM',trimp:152,ate:3.5,ante:3.3}],
+      alerts:[],
+      roster:[
+        {name:'Carly Stinson',trimp:91,ate:2.4,ante:1.7,epoc:30,moveload:191},
+        {name:'Sophie Abbott',trimp:96,ate:2.6,ante:2.5,epoc:42,moveload:162},
+        {name:'Sophia Auzenne',trimp:105,ate:2.8,ante:2.1,epoc:46,moveload:166},
+        {name:'Kyleigh Bathe',trimp:105,ate:3.2,ante:2.2,epoc:60,moveload:165},
+        {name:'Alicia Rierbich',trimp:112,ate:2.8,ante:2.3,epoc:52,moveload:209},
+        {name:'Sidney Nicholas',trimp:116,ate:3.1,ante:3.1,epoc:69,moveload:201},
+        {name:'True Benshoff',trimp:125,ate:2.9,ante:2.1,epoc:50,moveload:197},
+        {name:'Valentina Barrera',trimp:132,ate:3.2,ante:3.3,epoc:57,moveload:202},
+        {name:'Ava Gzym',trimp:136,ate:3.7,ante:3.7,epoc:114,moveload:106},
+        {name:'Cortlyn Hefty',trimp:140,ate:3.1,ante:2.2,epoc:72,moveload:172},
+        {name:'Olivia Lewis',trimp:147,ate:3.4,ante:2.0,epoc:76,moveload:261},
+        {name:'Ryleigh Alcala',trimp:153,ate:3.5,ante:3.1,epoc:92,moveload:160},
+        {name:'Olivia Cruz',trimp:155,ate:3.5,ante:3.0,epoc:87,moveload:227},
+        {name:'Lauryn Hancock',trimp:173,ate:4.1,ante:4.1,epoc:112,moveload:202},
+        {name:'Shanti Atkins',trimp:175,ate:4.1,ante:3.2,epoc:136,moveload:157},
+        {name:'Elise Boyd',trimp:184,ate:3.7,ante:2.7,epoc:91,moveload:209},
+      ]
+    },
+    {
+      id:'2026-07-24', date:'2026-07-24', reportTitle:'Day 3', sport:'Football', athletes:19,
+      start:'7:41:48 AM', end:'10:05:32 AM', duration:'02:23:44', type:'Training',
+      team:{trimp:205, ate:3.7, ante:3.1},
+      zones:[{z:'Z5',seconds:644,pct:7},{z:'Z4',seconds:2004,pct:23},{z:'Z3',seconds:1818,pct:21},{z:'Z2',seconds:1758,pct:20},{z:'Z1',seconds:1470,pct:17}],
+      positions:[{pos:'CB',trimp:194,ate:3.7,ante:2.8},{pos:'AM',trimp:182,ate:3.6,ante:3.0},{pos:'CF',trimp:226,ate:3.8,ante:2.7},{pos:'DM',trimp:229,ate:4.0,ante:4.0}],
+      alerts:[],
+      roster:[
+        {name:'Alicia Rierbich',trimp:145,ate:3.0,ante:2.6,epoc:52,moveload:313},
+        {name:'Sophia Auzenne',trimp:162,ate:3.5,ante:3.0,epoc:94,moveload:246},
+        {name:'Carly Stinson',trimp:169,ate:3.2,ante:2.5,epoc:89,moveload:333},
+        {name:'Ava Gzym',trimp:171,ate:3.8,ante:3.1,epoc:90,moveload:157},
+        {name:'True Benshoff',trimp:175,ate:3.0,ante:2.1,epoc:44,moveload:294},
+        {name:'Sophie Abbott',trimp:179,ate:3.9,ante:3.2,epoc:121,moveload:281},
+        {name:'Cortlyn Hefty',trimp:180,ate:2.9,ante:2.2,epoc:44,moveload:242},
+        {name:'Olivia Cruz',trimp:184,ate:3.4,ante:3.1,epoc:92,moveload:319},
+        {name:'Kyleigh Bathe',trimp:188,ate:3.8,ante:2.0,epoc:82,moveload:311},
+        {name:'Ruari Dever',trimp:202,ate:3.7,ante:3.1,epoc:77,moveload:338},
+        {name:'Emilee Tonkovich',trimp:202,ate:3.5,ante:2.7,epoc:72,moveload:259},
+        {name:'Sidney Nicholas',trimp:211,ate:3.9,ante:3.8,epoc:69,moveload:340},
+        {name:'Valentina Barrera',trimp:213,ate:3.9,ante:4.6,epoc:107,moveload:313},
+        {name:'Elise Boyd',trimp:215,ate:3.5,ante:2.8,epoc:66,moveload:304},
+        {name:'Olivia Lewis',trimp:231,ate:4.0,ante:3.1,epoc:101,moveload:414},
+        {name:'Nikki Miskovic',trimp:244,ate:4.2,ante:3.6,epoc:119,moveload:324},
+        {name:'Shanti Atkins',trimp:258,ate:4.4,ante:3.5,epoc:117,moveload:277},
+        {name:'Ryleigh Alcala',trimp:276,ate:4.7,ante:4.9,epoc:172,moveload:312},
+        {name:'Madi Wright',trimp:292,ate:4.9,ante:3.0,epoc:172,moveload:256},
+      ]
+    },
+    {
+      id:'2026-07-26', date:'2026-07-26', reportTitle:'Day 4', sport:'Football', athletes:20,
+      start:'8:11:05 AM', end:'10:07:08 AM', duration:'01:56:03', type:'Training',
+      team:{trimp:158, ate:3.4, ante:3.0},
+      zones:[{z:'Z5',seconds:421,pct:6},{z:'Z4',seconds:1399,pct:20},{z:'Z3',seconds:1503,pct:22},{z:'Z2',seconds:1620,pct:23},{z:'Z1',seconds:1371,pct:20}],
+      positions:[{pos:'CB',trimp:150,ate:3.4,ante:2.6},{pos:'AM',trimp:141,ate:3.3,ante:3.0},{pos:'CF',trimp:162,ate:3.2,ante:2.5},{pos:'DM',trimp:181,ate:3.6,ante:3.7}],
+      alerts:[],
+      roster:[
+        {name:'True Benshoff',trimp:111,ate:2.3,ante:2.2,epoc:25,moveload:207},
+        {name:'Ava Gzym',trimp:119,ate:3.1,ante:2.9,epoc:68,moveload:162},
+        {name:'Sidney Nicholas',trimp:124,ate:3.0,ante:3.0,epoc:57,moveload:244},
+        {name:'Sophie Abbott',trimp:125,ate:3.1,ante:3.0,epoc:62,moveload:211},
+        {name:'Kyleigh Bathe',trimp:129,ate:3.2,ante:1.3,epoc:58,moveload:209},
+        {name:'Alicia Rierbich',trimp:131,ate:3.1,ante:2.6,epoc:70,moveload:265},
+        {name:'Carly Stinson',trimp:143,ate:3.1,ante:2.8,epoc:68,moveload:275},
+        {name:'Ruari Dever',trimp:148,ate:3.3,ante:3.1,epoc:72,moveload:263},
+        {name:'Emilee Tonkovich',trimp:151,ate:3.1,ante:2.7,epoc:59,moveload:204},
+        {name:'Sophia Auzenne',trimp:155,ate:3.5,ante:2.7,epoc:114,moveload:214},
+        {name:'Cortlyn Hefty',trimp:156,ate:3.0,ante:2.1,epoc:44,moveload:201},
+        {name:'Shanti Atkins',trimp:160,ate:3.4,ante:3.2,epoc:68,moveload:206},
+        {name:'Olivia Lewis',trimp:163,ate:3.4,ante:3.2,epoc:70,moveload:261},
+        {name:'Olivia Cruz',trimp:169,ate:3.4,ante:3.1,epoc:83,moveload:256},
+        {name:'Nikki Miskovic',trimp:173,ate:3.7,ante:3.0,epoc:81,moveload:231},
+        {name:'Lauryn Hancock',trimp:179,ate:3.8,ante:3.7,epoc:126,moveload:260},
+        {name:'Valentina Barrera',trimp:187,ate:3.9,ante:4.9,epoc:122,moveload:272},
+        {name:'Ryleigh Alcala',trimp:202,ate:3.9,ante:4.4,epoc:125,moveload:229},
+        {name:'Elise Boyd',trimp:210,ate:3.6,ante:2.6,epoc:89,moveload:257},
+        {name:'Madi Wright',trimp:221,ate:4.1,ante:3.2,epoc:129,moveload:201},
+      ]
+    },
+    {
+      id:'2026-07-27', date:'2026-07-27', reportTitle:'Day 5', sport:'Football', athletes:20,
+      start:'7:53:20 AM', end:'9:36:32 AM', duration:'01:43:12', type:'Training',
+      team:{trimp:139, ate:3.3, ante:2.6},
+      zones:[{z:'Z5',seconds:361,pct:6},{z:'Z4',seconds:1203,pct:19},{z:'Z3',seconds:1327,pct:21},{z:'Z2',seconds:1644,pct:27},{z:'Z1',seconds:1259,pct:20}],
+      positions:[{pos:'CB',trimp:135,ate:3.4,ante:2.4},{pos:'AM',trimp:125,ate:3.3,ante:2.6},{pos:'CF',trimp:149,ate:3.4,ante:2.4},{pos:'DM',trimp:151,ate:3.5,ante:3.2}],
+      alerts:[],
+      roster:[
+        {name:'Sophie Abbott',trimp:88,ate:2.5,ante:2.3,epoc:38,moveload:152},
+        {name:'Alicia Rierbich',trimp:92,ate:2.5,ante:2.0,epoc:40,moveload:197},
+        {name:'Valentina Barrera',trimp:113,ate:3.1,ante:3.0,epoc:51,moveload:211},
+        {name:'Sophia Auzenne',trimp:115,ate:3.2,ante:2.2,epoc:69,moveload:158},
+        {name:'Kyleigh Bathe',trimp:117,ate:3.2,ante:1.5,epoc:60,moveload:191},
+        {name:'Ava Gzym',trimp:122,ate:3.5,ante:2.1,epoc:92,moveload:131},
+        {name:'Cortlyn Hefty',trimp:123,ate:2.7,ante:1.5,epoc:42,moveload:183},
+        {name:'Sidney Nicholas',trimp:125,ate:3.2,ante:3.0,epoc:55,moveload:219},
+        {name:'True Benshoff',trimp:137,ate:3.2,ante:2.4,epoc:63,moveload:216},
+        {name:'Nikki Miskovic',trimp:141,ate:3.4,ante:2.8,epoc:76,moveload:187},
+        {name:'Carly Stinson',trimp:142,ate:3.3,ante:2.6,epoc:78,moveload:235},
+        {name:'Ruari Dever',trimp:148,ate:3.5,ante:3.0,epoc:93,moveload:258},
+        {name:'Emilee Tonkovich',trimp:150,ate:3.4,ante:2.3,epoc:90,moveload:176},
+        {name:'Olivia Cruz',trimp:150,ate:3.4,ante:3.2,epoc:68,moveload:234},
+        {name:'Lauryn Hancock',trimp:163,ate:3.8,ante:3.2,epoc:102,moveload:243},
+        {name:'Shanti Atkins',trimp:164,ate:3.9,ante:3.1,epoc:122,moveload:188},
+        {name:'Madi Wright',trimp:170,ate:3.8,ante:2.7,epoc:118,moveload:128},
+        {name:'Olivia Lewis',trimp:171,ate:3.9,ante:3.3,epoc:130,moveload:225},
+        {name:'Elise Boyd',trimp:173,ate:3.5,ante:3.0,epoc:100,moveload:223},
+        {name:'Ryleigh Alcala',trimp:182,ate:3.9,ante:3.4,epoc:104,moveload:200},
+      ]
+    },
+    {
+      id:'2026-07-28', date:'2026-07-28', reportTitle:'Day 6', sport:'Football', athletes:20,
+      start:'8:00:35 AM', end:'9:44:19 AM', duration:'01:43:44', type:'Training',
+      team:{trimp:150, ate:3.5, ante:2.9, epoc:106, trimp7day:1029},
+      zones:[{z:'Z5',seconds:488,pct:8},{z:'Z4',seconds:1333,pct:21},{z:'Z3',seconds:1344,pct:22},{z:'Z2',seconds:1536,pct:25},{z:'Z1',seconds:1227,pct:20}],
+      positions:[{pos:'CB',trimp:143,ate:3.4,ante:2.7},{pos:'AM',trimp:148,ate:3.5,ante:3.0},{pos:'CF',trimp:153,ate:3.6,ante:2.8},{pos:'DM',trimp:158,ate:3.7,ante:3.3}],
+      alerts:[],
+      roster:[
+        {name:'Kyleigh Bathe',trimp:111,ate:3.1,ante:1.5,epoc:79,trimp7day:839,moveload:208},
+        {name:'Alicia Rierbich',trimp:121,ate:3.1,ante:2.4,epoc:79,trimp7day:849,moveload:237},
+        {name:'Ava Gzym',trimp:128,ate:3.3,ante:2.5,epoc:80,trimp7day:926,moveload:169},
+        {name:'Sidney Nicholas',trimp:131,ate:3.5,ante:3.5,epoc:119,trimp7day:955,moveload:241},
+        {name:'Carly Stinson',trimp:133,ate:3.2,ante:2.5,epoc:84,trimp7day:888,moveload:251},
+        {name:'Valentina Barrera',trimp:138,ate:3.6,ante:3.6,epoc:124,trimp7day:1022,moveload:230},
+        {name:'Ruari Dever',trimp:140,ate:3.4,ante:3.0,epoc:105,trimp7day:1006,moveload:257},
+        {name:'Madi Wright',trimp:142,ate:3.4,ante:2.4,epoc:66,trimp7day:845,moveload:190},
+        {name:'True Benshoff',trimp:143,ate:3.1,ante:2.5,epoc:61,trimp7day:855,moveload:242},
+        {name:'Nikki Miskovic',trimp:144,ate:3.5,ante:2.9,epoc:111,trimp7day:1116,moveload:180},
+        {name:'Cortlyn Hefty',trimp:144,ate:3.1,ante:2.5,epoc:69,trimp7day:1044,moveload:200},
+        {name:'Sophie Abbott',trimp:149,ate:3.8,ante:3.3,epoc:143,trimp7day:909,moveload:229},
+        {name:'Emilee Tonkovich',trimp:153,ate:3.5,ante:2.8,epoc:103,trimp7day:1068,moveload:212},
+        {name:'Lauryn Hancock',trimp:161,ate:3.9,ante:3.2,epoc:114,trimp7day:1187,moveload:263},
+        {name:'Olivia Lewis',trimp:170,ate:3.6,ante:3.1,epoc:109,trimp7day:1170,moveload:310},
+        {name:'Olivia Cruz',trimp:173,ate:3.8,ante:3.5,epoc:148,trimp7day:1119,moveload:262},
+        {name:'Sophia Auzenne',trimp:177,ate:4.0,ante:3.3,epoc:153,trimp7day:1020,moveload:232},
+        {name:'Elise Boyd',trimp:178,ate:3.6,ante:2.5,epoc:111,trimp7day:1248,moveload:238},
+        {name:'Ryleigh Alcala',trimp:182,ate:3.9,ante:3.7,epoc:116,trimp7day:1267,moveload:186},
+        {name:'Shanti Atkins',trimp:183,ate:4.2,ante:3.5,epoc:138,trimp7day:1253,moveload:220},
+      ]
+    },
+    {
+      id:'2026-07-29', date:'2026-07-29', reportTitle:'Day 7', sport:'Football', athletes:20,
+      start:'7:51:53 AM', end:'9:42:01 AM', duration:'01:50:08', type:'Training',
+      team:{trimp:133, ate:3.1, ante:2.6},
+      zones:[{z:'Z5',seconds:293,pct:4},{z:'Z4',seconds:1197,pct:18},{z:'Z3',seconds:1226,pct:19},{z:'Z2',seconds:1544,pct:23},{z:'Z1',seconds:1647,pct:25}],
+      positions:[{pos:'CB',trimp:125,ate:3.0,ante:2.1},{pos:'AM',trimp:131,ate:3.1,ante:3.0},{pos:'CF',trimp:150,ate:3.2,ante:2.7},{pos:'DM',trimp:131,ate:3.0,ante:2.7}],
+      alerts:[],
+      roster:[
+        {name:'Kyleigh Bathe',trimp:83,ate:2.4,ante:0.8,epoc:34,moveload:180},
+        {name:'Valentina Barrera',trimp:96,ate:2.6,ante:2.9,epoc:41,moveload:182},
+        {name:'Alicia Rierbich',trimp:96,ate:2.4,ante:2.2,epoc:37,moveload:220},
+        {name:'Ava Gzym',trimp:98,ate:2.7,ante:2.4,epoc:43,moveload:141},
+        {name:'Carly Stinson',trimp:104,ate:2.5,ante:2.0,epoc:40,moveload:216},
+        {name:'Ruari Dever',trimp:121,ate:3.0,ante:2.5,epoc:57,moveload:235},
+        {name:'Sophie Abbott',trimp:123,ate:3.1,ante:3.2,epoc:82,moveload:216},
+        {name:'Lauryn Hancock',trimp:123,ate:3.1,ante:2.6,epoc:56,moveload:218},
+        {name:'True Benshoff',trimp:123,ate:2.8,ante:2.2,epoc:40,moveload:218},
+        {name:'Cortlyn Hefty',trimp:127,ate:2.5,ante:2.2,epoc:35,moveload:189},
+        {name:'Emilee Tonkovich',trimp:128,ate:3.0,ante:2.2,epoc:47,moveload:212},
+        {name:'Sidney Nicholas',trimp:129,ate:3.3,ante:3.2,epoc:70,moveload:188},
+        {name:'Olivia Cruz',trimp:148,ate:3.3,ante:3.0,epoc:82,moveload:259},
+        {name:'Sophia Auzenne',trimp:148,ate:3.3,ante:2.5,epoc:73,moveload:195},
+        {name:'Ryleigh Alcala',trimp:149,ate:3.2,ante:3.0,epoc:79,moveload:162},
+        {name:'Elise Boyd',trimp:156,ate:3.1,ante:2.0,epoc:52,moveload:207},
+        {name:'Nikki Miskovic',trimp:167,ate:3.6,ante:3.1,epoc:78,moveload:226},
+        {name:'Madi Wright',trimp:175,ate:3.7,ante:2.6,epoc:77,moveload:182},
+        {name:'Shanti Atkins',trimp:176,ate:3.8,ante:3.3,epoc:91,moveload:215},
+        {name:'Olivia Lewis',trimp:192,ate:4.0,ante:4.0,epoc:125,moveload:329},
+      ]
+    },
+    {
+      id:'2026-07-29-pm', date:'2026-07-29', reportTitle:'Day 7B', sport:'Football', athletes:20,
+      start:'2:54:14 PM', end:'5:00:33 PM', duration:'02:06:19', type:'Training',
+      team:{trimp:171, ate:3.5, ante:2.9},
+      zones:[{z:'Z5',seconds:555,pct:7},{z:'Z4',seconds:1590,pct:21},{z:'Z3',seconds:1466,pct:19},{z:'Z2',seconds:1601,pct:21},{z:'Z1',seconds:1370,pct:18}],
+      positions:[{pos:'CB',trimp:172,ate:3.7,ante:2.8},{pos:'AM',trimp:161,ate:3.4,ante:3.0},{pos:'CF',trimp:160,ate:3.3,ante:2.5},{pos:'DM',trimp:187,ate:3.8,ante:3.4}],
+      alerts:[],
+      roster:[
+        {name:'Cortlyn Hefty',trimp:113,ate:2.2,ante:1.6,epoc:30,moveload:225},
+        {name:'Sophie Abbott',trimp:119,ate:3.1,ante:2.6,epoc:73,moveload:209},
+        {name:'Alicia Rierbich',trimp:129,ate:3.0,ante:2.6,epoc:62,moveload:252},
+        {name:'Kyleigh Bathe',trimp:135,ate:3.3,ante:2.2,epoc:59,moveload:242},
+        {name:'True Benshoff',trimp:156,ate:3.1,ante:2.6,epoc:56,moveload:266},
+        {name:'Lauryn Hancock',trimp:158,ate:3.4,ante:3.3,epoc:74,moveload:283},
+        {name:'Emilee Tonkovich',trimp:160,ate:3.3,ante:2.5,epoc:74,moveload:227},
+        {name:'Carly Stinson',trimp:164,ate:3.4,ante:2.5,epoc:94,moveload:283},
+        {name:'Ruari Dever',trimp:164,ate:3.4,ante:2.5,epoc:89,moveload:305},
+        {name:'Madi Wright',trimp:169,ate:3.7,ante:2.6,epoc:111,moveload:162},
+        {name:'Ava Gzym',trimp:173,ate:3.6,ante:3.4,epoc:78,moveload:207},
+        {name:'Elise Boyd',trimp:176,ate:3.2,ante:2.0,epoc:69,moveload:237},
+        {name:'Olivia Lewis',trimp:180,ate:3.6,ante:2.9,epoc:102,moveload:325},
+        {name:'Nikki Miskovic',trimp:182,ate:3.8,ante:3.2,epoc:91,moveload:236},
+        {name:'Valentina Barrera',trimp:182,ate:3.9,ante:4.0,epoc:116,moveload:258},
+        {name:'Sidney Nicholas',trimp:197,ate:4.0,ante:4.1,epoc:127,moveload:257},
+        {name:'Shanti Atkins',trimp:202,ate:4.0,ante:3.4,epoc:97,moveload:223},
+        {name:'Olivia Cruz',trimp:204,ate:3.9,ante:3.2,epoc:101,moveload:304},
+        {name:'Ryleigh Alcala',trimp:223,ate:4.4,ante:4.1,epoc:136,moveload:231},
+        {name:'Sophia Auzenne',trimp:228,ate:4.3,ante:3.3,epoc:156,moveload:263},
+      ]
+    },
+    {
+      id:'2026-07-30', date:'2026-07-30', reportTitle:'Day 8A', sport:'Football', athletes:20,
+      start:'8:17:11 AM', end:'10:07:52 AM', duration:'01:50:41', type:'Training',
+      team:{trimp:102, ate:2.4, ante:1.8},
+      zones:[{z:'Z5',seconds:59,pct:1},{z:'Z4',seconds:460,pct:7},{z:'Z3',seconds:1184,pct:18},{z:'Z2',seconds:1929,pct:29},{z:'Z1',seconds:2251,pct:34}],
+      positions:[{pos:'CB',trimp:101,ate:2.5,ante:1.7},{pos:'AM',trimp:97,ate:2.5,ante:2.0},{pos:'CF',trimp:105,ate:2.3,ante:1.1},{pos:'DM',trimp:108,ate:2.5,ante:2.3}],
+      alerts:[],
+      roster:[
+        {name:'Ava Gzym',trimp:71,ate:2.0,ante:1.1,epoc:23,moveload:140},
+        {name:'True Benshoff',trimp:76,ate:1.6,ante:0.0,epoc:15,moveload:163},
+        {name:'Valentina Barrera',trimp:79,ate:2.2,ante:2.9,epoc:31,moveload:169},
+        {name:'Olivia Cruz',trimp:83,ate:2.2,ante:1.7,epoc:32,moveload:211},
+        {name:'Alicia Rierbich',trimp:86,ate:2.2,ante:1.6,epoc:31,moveload:218},
+        {name:'Carly Stinson',trimp:90,ate:2.3,ante:1.3,epoc:38,moveload:213},
+        {name:'Madi Wright',trimp:91,ate:2.1,ante:0.6,epoc:26,moveload:124},
+        {name:'Kyleigh Bathe',trimp:93,ate:2.6,ante:0.9,epoc:51,moveload:204},
+        {name:'Emilee Tonkovich',trimp:96,ate:2.2,ante:1.2,epoc:25,moveload:176},
+        {name:'Sophia Auzenne',trimp:98,ate:2.3,ante:1.2,epoc:33,moveload:175},
+        {name:'Sidney Nicholas',trimp:98,ate:2.4,ante:2.4,epoc:38,moveload:175},
+        {name:'Lauryn Hancock',trimp:107,ate:2.6,ante:2.2,epoc:36,moveload:205},
+        {name:'Sophie Abbott',trimp:109,ate:2.8,ante:2.1,epoc:40,moveload:191},
+        {name:'Nikki Miskovic',trimp:113,ate:2.6,ante:2.1,epoc:31,moveload:196},
+        {name:'Cortlyn Hefty',trimp:114,ate:2.1,ante:0.8,epoc:27,moveload:160},
+        {name:'Ruari Dever',trimp:115,ate:2.9,ante:2.8,epoc:43,moveload:237},
+        {name:'Ryleigh Alcala',trimp:122,ate:2.7,ante:2.8,epoc:40,moveload:140},
+        {name:'Elise Boyd',trimp:132,ate:2.5,ante:1.1,epoc:30,moveload:184},
+        {name:'Olivia Lewis',trimp:135,ate:3.0,ante:3.4,epoc:70,moveload:247},
+        {name:'Shanti Atkins',trimp:140,ate:3.2,ante:3.0,epoc:77,moveload:188},
+      ]
+    },
+    {
+      id:'2026-07-31', date:'2026-07-31', reportTitle:'Day 9A', sport:'Football', athletes:20,
+      start:'8:00:42 AM', end:'9:39:50 AM', duration:'01:39:08', type:'Training',
+      team:{trimp:119, ate:3.1, ante:2.2},
+      zones:[{z:'Z5',seconds:235,pct:4},{z:'Z4',seconds:1037,pct:17},{z:'Z3',seconds:1302,pct:22},{z:'Z2',seconds:1354,pct:23},{z:'Z1',seconds:1357,pct:23}],
+      positions:[{pos:'CB',trimp:113,ate:2.9,ante:1.9},{pos:'AM',trimp:122,ate:3.0,ante:2.6},{pos:'CF',trimp:118,ate:3.2,ante:2.0},{pos:'DM',trimp:124,ate:3.1,ante:2.6}],
+      alerts:[],
+      roster:[
+        {name:'Cortlyn Hefty',trimp:45,ate:2.3,ante:0.5,epoc:41,moveload:83},
+        {name:'Kyleigh Bathe',trimp:87,ate:2.7,ante:1.1,epoc:39,moveload:181},
+        {name:'Lauryn Hancock',trimp:97,ate:2.8,ante:2.0,epoc:45,moveload:183},
+        {name:'Carly Stinson',trimp:100,ate:2.5,ante:1.6,epoc:41,moveload:189},
+        {name:'Sidney Nicholas',trimp:100,ate:3.0,ante:2.1,epoc:53,moveload:191},
+        {name:'Alicia Rierbich',trimp:102,ate:2.7,ante:2.2,epoc:51,moveload:214},
+        {name:'True Benshoff',trimp:105,ate:2.7,ante:2.0,epoc:45,moveload:195},
+        {name:'Valentina Barrera',trimp:106,ate:3.0,ante:3.0,epoc:55,moveload:176},
+        {name:'Emilee Tonkovich',trimp:111,ate:2.8,ante:2.0,epoc:40,moveload:168},
+        {name:'Ava Gzym',trimp:111,ate:3.0,ante:2.3,epoc:54,moveload:150},
+        {name:'Ruari Dever',trimp:118,ate:3.1,ante:2.1,epoc:65,moveload:219},
+        {name:'Nikki Miskovic',trimp:124,ate:3.2,ante:2.6,epoc:58,moveload:193},
+        {name:'Sophie Abbott',trimp:128,ate:3.2,ante:3.1,epoc:72,moveload:190},
+        {name:'Shanti Atkins',trimp:130,ate:3.3,ante:2.4,epoc:62,moveload:183},
+        {name:'Olivia Cruz',trimp:132,ate:3.2,ante:2.7,epoc:62,moveload:226},
+        {name:'Sophia Auzenne',trimp:136,ate:3.4,ante:2.2,epoc:74,moveload:194},
+        {name:'Olivia Lewis',trimp:137,ate:3.3,ante:2.3,epoc:65,moveload:282},
+        {name:'Ryleigh Alcala',trimp:156,ate:3.5,ante:3.6,epoc:91,moveload:182},
+        {name:'Elise Boyd',trimp:159,ate:3.3,ante:2.2,epoc:72,moveload:214},
+        {name:'Madi Wright',trimp:192,ate:4.3,ante:3.0,epoc:150,moveload:176},
+      ]
+    },
+    {
+      id:'2026-08-02', date:'2026-08-02', reportTitle:'Day 10A', sport:'Football', athletes:20,
+      start:'8:05:07 AM', end:'9:54:02 AM', duration:'01:48:55', type:'Training',
+      team:{trimp:139, ate:3.2, ante:2.7, epoc:68},
+      zones:[{z:'Z5',seconds:330,pct:5},{z:'Z4',seconds:1360,pct:21},{z:'Z3',seconds:1011,pct:15},{z:'Z2',seconds:1545,pct:24},{z:'Z1',seconds:1665,pct:25}],
+      positions:[{pos:'CB',trimp:124,ate:3.1,ante:2.0},{pos:'W',trimp:151,ate:3.5,ante:3.0},{pos:'AM',trimp:137,ate:3.3,ante:2.9},{pos:'CF',trimp:143,ate:3.0,ante:2.3},{pos:'DM',trimp:171,ate:3.6,ante:3.3},{pos:'OB',trimp:124,ate:3.0,ante:2.4}],
+      alerts:[],
+      roster:[
+        {name:'Lauryn Hancock',trimp:66,ate:2.6,ante:2.0,epoc:42,moveload:113},
+        {name:'Kyleigh Bathe',trimp:96,ate:2.8,ante:1.0,epoc:45,moveload:198},
+        {name:'Ava Gzym',trimp:110,ate:2.9,ante:2.3,epoc:46,moveload:157},
+        {name:'Valentina Barrera',trimp:111,ate:3.0,ante:3.1,epoc:58,moveload:177},
+        {name:'Sophie Abbott',trimp:121,ate:3.0,ante:3.2,epoc:42,moveload:204},
+        {name:'True Benshoff',trimp:126,ate:3.0,ante:2.3,epoc:54,moveload:203},
+        {name:'Carly Stinson',trimp:130,ate:3.0,ante:2.3,epoc:54,moveload:239},
+        {name:'Ruari Dever',trimp:133,ate:3.3,ante:2.5,epoc:77,moveload:243},
+        {name:'Cortlyn Hefty',trimp:140,ate:2.7,ante:2.1,epoc:37,moveload:182},
+        {name:'Shanti Atkins',trimp:140,ate:3.4,ante:2.7,epoc:84,moveload:177},
+        {name:'Alicia Rierbich',trimp:142,ate:3.3,ante:2.9,epoc:60,moveload:260},
+        {name:'Ryleigh Alcala',trimp:146,ate:3.3,ante:3.0,epoc:73,moveload:173},
+        {name:'Nikki Miskovic',trimp:147,ate:3.4,ante:2.8,epoc:69,moveload:190},
+        {name:'Emilee Tonkovich',trimp:147,ate:3.3,ante:2.6,epoc:72,moveload:183},
+        {name:'Sophia Auzenne',trimp:148,ate:3.3,ante:2.3,epoc:73,moveload:189},
+        {name:'Madi Wright',trimp:149,ate:3.4,ante:2.0,epoc:93,moveload:143},
+        {name:'Olivia Cruz',trimp:171,ate:3.6,ante:3.3,epoc:81,moveload:245},
+        {name:'Sidney Nicholas',trimp:171,ate:3.9,ante:3.8,epoc:102,moveload:260},
+        {name:'Olivia Lewis',trimp:175,ate:3.9,ante:3.4,epoc:98,moveload:293},
+        {name:'Elise Boyd',trimp:201,ate:3.8,ante:2.6,epoc:94,moveload:250},
+      ]
+    },
+    {
+      id:'2026-08-02-pm', date:'2026-08-02', reportTitle:'Day 10B', sport:'Football', athletes:20,
+      start:'3:49:21 PM', end:'5:10:58 PM', duration:'01:21:37', type:'Training',
+      team:{trimp:126, ate:3.4, ante:2.6, epoc:98},
+      zones:[{z:'Z5',seconds:298,pct:6},{z:'Z4',seconds:1352,pct:28},{z:'Z3',seconds:1163,pct:24},{z:'Z2',seconds:1050,pct:21},{z:'Z1',seconds:835,pct:17}],
+      positions:[{pos:'CB',trimp:120,ate:3.3,ante:2.1},{pos:'W',trimp:138,ate:3.5,ante:3.0},{pos:'AM',trimp:120,ate:3.4,ante:2.7},{pos:'CF',trimp:117,ate:3.3,ante:2.3},{pos:'DM',trimp:146,ate:3.7,ante:3.1},{pos:'OB',trimp:121,ate:3.4,ante:2.4}],
+      alerts:[],
+      roster:[
+        {name:'Lauryn Hancock',trimp:79,ate:3.1,ante:2.7,epoc:70,moveload:212},
+        {name:'Madi Wright',trimp:85,ate:3.1,ante:1.6,epoc:76,moveload:113},
+        {name:'Kyleigh Bathe',trimp:88,ate:3.0,ante:0.6,epoc:62,moveload:201},
+        {name:'Sophie Abbott',trimp:107,ate:3.2,ante:2.4,epoc:73,moveload:199},
+        {name:'Alicia Rierbich',trimp:108,ate:3.3,ante:2.4,epoc:86,moveload:204},
+        {name:'True Benshoff',trimp:109,ate:3.0,ante:2.0,epoc:60,moveload:194},
+        {name:'Emilee Tonkovich',trimp:127,ate:3.4,ante:2.1,epoc:86,moveload:197},
+        {name:'Ava Gzym',trimp:129,ate:3.7,ante:2.8,epoc:132,moveload:182},
+        {name:'Nikki Miskovic',trimp:130,ate:3.5,ante:2.7,epoc:104,moveload:181},
+        {name:'Cortlyn Hefty',trimp:131,ate:3.2,ante:2.7,epoc:78,moveload:178},
+        {name:'Valentina Barrera',trimp:131,ate:3.7,ante:3.5,epoc:108,moveload:201},
+        {name:'Olivia Lewis',trimp:133,ate:3.7,ante:3.0,epoc:111,moveload:267},
+        {name:'Shanti Atkins',trimp:136,ate:3.7,ante:2.6,epoc:123,moveload:187},
+        {name:'Ruari Dever',trimp:139,ate:3.8,ante:2.1,epoc:111,moveload:278},
+        {name:'Sidney Nicholas',trimp:140,ate:3.7,ante:3.7,epoc:110,moveload:216},
+        {name:'Sophia Auzenne',trimp:142,ate:3.8,ante:2.4,epoc:119,moveload:195},
+        {name:'Carly Stinson',trimp:143,ate:3.5,ante:3.0,epoc:101,moveload:251},
+        {name:'Olivia Cruz',trimp:146,ate:3.7,ante:3.1,epoc:116,moveload:249},
+        {name:'Ryleigh Alcala',trimp:152,ate:3.8,ante:3.2,epoc:114,moveload:201},
+        {name:'Elise Boyd',trimp:157,ate:3.7,ante:2.4,epoc:112,moveload:233},
+      ]
+    },
+    {
+      id:'2026-08-03', date:'2026-08-03', reportTitle:'Day 11A', sport:'Football', athletes:20,
+      start:'8:05:28 AM', end:'9:56:35 AM', duration:'01:51:07', type:'Training',
+      team:{trimp:117, ate:2.8, ante:2.2},
+      zones:[{z:'Z5',seconds:160,pct:2},{z:'Z4',seconds:1101,pct:17},{z:'Z3',seconds:1232,pct:18},{z:'Z2',seconds:1240,pct:19},{z:'Z1',seconds:1601,pct:24}],
+      positions:[{pos:'CB',trimp:92,ate:2.6,ante:1.5},{pos:'W',trimp:113,ate:2.6,ante:2.3},{pos:'AM',trimp:129,ate:3.2,ante:3.0},{pos:'CF',trimp:121,ate:2.8,ante:2.4},{pos:'DM',trimp:146,ate:3.2,ante:3.1},{pos:'OB',trimp:116,ate:2.9,ante:2.1}],
+      alerts:[],
+      roster:[
+        {name:'Carly Stinson',trimp:69,ate:2.1,ante:0.5,epoc:26,moveload:184},
+        {name:'True Benshoff',trimp:77,ate:2.0,ante:1.1,epoc:21,moveload:173},
+        {name:'Valentina Barrera',trimp:80,ate:2.3,ante:2.5,epoc:27,moveload:189},
+        {name:'Kyleigh Bathe',trimp:88,ate:2.8,ante:1.0,epoc:52,moveload:224},
+        {name:'Emilee Tonkovich',trimp:90,ate:2.5,ante:1.1,epoc:37,moveload:163},
+        {name:'Sophie Abbott',trimp:96,ate:2.8,ante:2.7,epoc:43,moveload:208},
+        {name:'Sidney Nicholas',trimp:109,ate:2.9,ante:2.6,epoc:59,moveload:209},
+        {name:'Shanti Atkins',trimp:112,ate:2.7,ante:2.6,epoc:46,moveload:144},
+        {name:'Ava Gzym',trimp:112,ate:3.1,ante:2.9,epoc:65,moveload:167},
+        {name:'Lauryn Hancock',trimp:118,ate:3.1,ante:3.0,epoc:51,moveload:211},
+        {name:'Cortlyn Hefty',trimp:119,ate:2.5,ante:2.2,epoc:51,moveload:177},
+        {name:'Nikki Miskovic',trimp:120,ate:3.0,ante:2.9,epoc:49,moveload:196},
+        {name:'Ruari Dever',trimp:123,ate:3.1,ante:2.2,epoc:53,moveload:268},
+        {name:'Madi Wright',trimp:131,ate:3.1,ante:2.2,epoc:52,moveload:165},
+        {name:'Sophia Auzenne',trimp:133,ate:3.2,ante:2.1,epoc:61,moveload:193},
+        {name:'Ryleigh Alcala',trimp:137,ate:3.2,ante:3.2,epoc:65,moveload:195},
+        {name:'Alicia Rierbich',trimp:141,ate:3.3,ante:3.0,epoc:73,moveload:271},
+        {name:'Olivia Cruz',trimp:146,ate:3.2,ante:3.1,epoc:75,moveload:266},
+        {name:'Elise Boyd',trimp:164,ate:3.2,ante:2.2,epoc:71,moveload:258},
+        {name:'Olivia Lewis',trimp:167,ate:3.7,ante:3.2,epoc:93,moveload:379},
+      ]
+    },
+    {
+      id:'2026-08-04', date:'2026-08-04', reportTitle:'Day 12', sport:'Football', athletes:19, isTaper:true,
+      start:'8:38:37 AM', end:'10:03:58 AM', duration:'01:25:21', type:'Training',
+      team:{trimp:89, ate:2.7, ante:2.2},
+      zones:[{z:'Z5',seconds:227,pct:4},{z:'Z4',seconds:630,pct:12},{z:'Z3',seconds:940,pct:18},{z:'Z2',seconds:1283,pct:25},{z:'Z1',seconds:1281,pct:25}],
+      positions:[{pos:'CB',trimp:55,ate:1.9,ante:1.2},{pos:'W',trimp:93,ate:2.6,ante:2.2},{pos:'AM',trimp:80,ate:2.6,ante:2.7},{pos:'CF',trimp:114,ate:3.0,ante:2.5},{pos:'DM',trimp:120,ate:3.2,ante:3.1},{pos:'OB',trimp:96,ate:2.7,ante:2.2}],
+      alerts:[],
+      roster:[
+        {name:'Nikki Miskovic',trimp:38,ate:2.1,ante:1.3},
+        {name:'Kyleigh Bathe',trimp:43,ate:1.3,ante:0.3},
+        {name:'Sophie Abbott',trimp:55,ate:2.1,ante:2.1},
+        {name:'Valentina Barrera',trimp:62,ate:2.1,ante:2.3},
+        {name:'Alicia Rierbich',trimp:71,ate:2.2,ante:2.1},
+        {name:'Emilee Tonkovich',trimp:74,ate:2.1,ante:1.0},
+        {name:'True Benshoff',trimp:76,ate:2.0,ante:1.2},
+        {name:'Ryleigh Alcala',trimp:81,ate:2.2,ante:1.7},
+        {name:'Ruari Dever',trimp:82,ate:2.7,ante:2.3},
+        {name:'Carly Stinson',trimp:83,ate:2.3,ante:2.1},
+        {name:'Olivia Lewis',trimp:86,ate:2.8,ante:3.0},
+        {name:'Cortlyn Hefty',trimp:96,ate:2.3,ante:2.0},
+        {name:'Ava Gzym',trimp:106,ate:3.1,ante:2.9},
+        {name:'Madi Wright',trimp:119,ate:3.3,ante:2.5},
+        {name:'Elise Boyd',trimp:119,ate:2.9,ante:2.1},
+        {name:'Olivia Cruz',trimp:120,ate:3.2,ante:3.1},
+        {name:'Shanti Atkins',trimp:126,ate:3.5,ante:3.0},
+        {name:'Sidney Nicholas',trimp:128,ate:3.6,ante:3.7},
+        {name:'Lauryn Hancock',trimp:130,ate:3.4,ante:3.2},
+      ]
+    },
+    {
+      id:'2026-08-05', date:'2026-08-05', reportTitle:'Game vs Toledo', sport:'Football', athletes:20,
+      start:'6:58:45 PM', end:'9:08:28 PM', duration:'02:09:43', type:'Training', isGame:true,
+      team:{trimp:203, ate:4.0, ante:3.0},
+      zones:[{z:'Z5',seconds:1310,pct:17},{z:'Z4',seconds:1551,pct:20},{z:'Z3',seconds:894,pct:11},{z:'Z2',seconds:1446,pct:19},{z:'Z1',seconds:1927,pct:25}],
+      positions:[{pos:'CB',trimp:208,ate:3.8,ante:2.4},{pos:'W',trimp:226,ate:4.2,ante:3.3},{pos:'AM',trimp:160,ate:3.8,ante:3.1},{pos:'CF',trimp:174,ate:3.7,ante:2.4},{pos:'DM',trimp:366,ate:5.0,ante:4.6},{pos:'OB',trimp:195,ate:4.4,ante:2.5}],
+      alerts:[{name:'Valentina Barrera',from:198,to:201}],
+      roster:[
+        {name:'Kyleigh Bathe',trimp:41,ate:2.6,ante:1.1,epoc:54,moveload:83},
+        {name:'Ava Gzym',trimp:71,ate:2.9,ante:2.3,epoc:64,moveload:64},
+        {name:'Lauryn Hancock',trimp:99,ate:3.5,ante:2.3,epoc:110,moveload:104},
+        {name:'Shanti Atkins',trimp:132,ate:3.4,ante:2.7,epoc:99,moveload:125},
+        {name:'Sophie Abbott',trimp:165,ate:3.6,ante:3.3,epoc:127,moveload:214},
+        {name:'Ryleigh Alcala',trimp:176,ate:4.2,ante:2.5,epoc:165,moveload:175},
+        {name:'True Benshoff',trimp:177,ate:3.5,ante:2.1,epoc:108,moveload:218},
+        {name:'Madi Wright',trimp:194,ate:4.1,ante:2.5,epoc:163,moveload:160},
+        {name:'Cortlyn Hefty',trimp:196,ate:3.5,ante:2.0,epoc:94,moveload:218},
+        {name:'Alicia Rierbich',trimp:198,ate:4.3,ante:3.0,epoc:163,moveload:306},
+        {name:'Olivia Lewis',trimp:207,ate:4.5,ante:4.0,epoc:183,moveload:263},
+        {name:'Ruari Dever',trimp:211,ate:4.7,ante:2.3,epoc:198,moveload:241},
+        {name:'Sophia Auzenne',trimp:231,ate:4.7,ante:2.8,epoc:216,moveload:237},
+        {name:'Elise Boyd',trimp:238,ate:4.2,ante:2.7,epoc:144,moveload:328},
+        {name:'Emilee Tonkovich',trimp:241,ate:4.9,ante:2.4,epoc:189,moveload:291},
+        {name:'Valentina Barrera',trimp:264,ate:5.0,ante:4.4,epoc:352,moveload:357},
+        {name:'Sidney Nicholas',trimp:277,ate:5.0,ante:4.8,epoc:215,moveload:314},
+        {name:'Nikki Miskovic',trimp:288,ate:5.0,ante:3.4,epoc:231,moveload:353},
+        {name:'Carly Stinson',trimp:295,ate:5.0,ante:2.7,epoc:197,moveload:461},
+        {name:'Olivia Cruz',trimp:366,ate:5.0,ante:4.6,epoc:331,moveload:500},
+      ]
+    }
+  ];
+
+  function yoyoToVO2max(shuttles){
+    const distance = shuttles*40;
+    return distance*0.0084+36.4;
+  }
+
+  const fitnessTest = {
+    testLabel: 'Fall 1 2026',
+    testType: 'Yo-Yo Intermittent Recovery Test, Level 1',
+    field: [
+      {name:'True Benshoff', shuttles:43},
+      {name:'Carly Stinson', shuttles:41},
+      {name:'Elise Boyd', shuttles:40},
+      {name:'Sidney Nicholas', shuttles:40},
+      {name:'Alicia Rierbich', shuttles:40},
+      {name:'Nikki Miskovic', shuttles:40},
+      {name:'Olivia Cruz', shuttles:40},
+      {name:'Sophie Abbott', shuttles:40},
+      {name:'Valentina Barrera', shuttles:39},
+      {name:'Emilee Tonkovich', shuttles:38},
+      {name:'Sophia Auzenne', shuttles:38},
+      {name:'Cortlyn Hefty', shuttles:37},
+      {name:'Ryleigh Alcala', shuttles:37},
+      {name:'Olivia Lewis', shuttles:36},
+      {name:'Shanti Atkins', shuttles:35},
+      {name:'Ava Gzym', shuttles:35},
+      {name:'Kyleigh Bathe', shuttles:31},
+      {name:'Ruari Dever', shuttles:27},
+      {name:'Lauryn Hancock', shuttles:26},
+      {name:'Madi Wright', shuttles:25},
+      {name:'Elsa Baldasano-Martinez', shuttles:null},
+      {name:'Livia Penton', shuttles:null},
+      {name:'Ella Sikorski', shuttles:null},
+    ],
+    gk: [
+      {name:'Hayleigh Lewis', shuttles:39},
+      {name:'Téa Optiz', shuttles:27},
+      {name:'Summer Swords', shuttles:26},
+    ]
+  };
+
+  let sessions = [];
+  let activeId = null;
+  let sortState = {key:'trimp', dir:'desc'};
+
+  function parseDuration(str){
+    if(!str) return 0;
+    const parts = str.split(':').map(Number);
+    if(parts.some(isNaN)) return 0;
+    if(parts.length===3) return parts[0]*3600+parts[1]*60+parts[2];
+    if(parts.length===2) return parts[0]*60+parts[1];
+    return 0;
+  }
+  function formatSeconds(sec){
+    sec = Math.round(sec);
+    const h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+    const mm = String(m).padStart(2,'0'), ss = String(s).padStart(2,'0');
+    return h>0 ? `${h}:${mm}:${ss}` : `${m}:${ss}`;
+  }
+  function sessionPeriod(s){
+    if(!s.start) return '';
+    const m = s.start.match(/(\d+):\d+:\d+\s*(AM|PM)/i);
+    if(!m) return '';
+    let hour = parseInt(m[1],10);
+    const ampm = m[2].toUpperCase();
+    if(ampm==='AM') hour = hour===12?0:hour;
+    else hour = hour===12?12:hour+12;
+    if(hour<12) return 'Morning';
+    if(hour<17) return 'Afternoon';
+    return 'Evening';
+  }
+
+  function shortDate(dateStr){
+    if(!dateStr) return '—';
+    const d = new Date(dateStr+'T00:00:00');
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  }
+  function fullDate(dateStr){
+    if(!dateStr) return '—';
+    const d = new Date(dateStr+'T00:00:00');
+    return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  }
+  function getWeekRange(dateStr){
+    const d = new Date(dateStr+'T00:00:00');
+    const day = d.getDay();
+    const diffToMonday = (day===0 ? -6 : 1-day);
+    const monday = new Date(d); monday.setDate(d.getDate()+diffToMonday);
+    const sunday = new Date(monday); sunday.setDate(monday.getDate()+6);
+    return {monday, sunday, key: monday.toISOString().slice(0,10)};
+  }
+
+  const hasClaudeStorage = typeof window.storage !== 'undefined' && window.storage && typeof window.storage.get === 'function';
+
+  async function loadSessions(){
+    let stored = [];
+    try{
+      if(hasClaudeStorage){
+        const res = await window.storage.get('sessions', true);
+        stored = res && res.value ? JSON.parse(res.value) : [];
+      } else {
+        const raw = localStorage.getItem('wsoc_load_sessions');
+        stored = raw ? JSON.parse(raw) : [];
+      }
+    }catch(e){ stored = []; }
+    const merged = [...stored];
+    seedSessions.forEach(seed=>{
+      const idx = merged.findIndex(x=>x.id===seed.id);
+      if(idx>=0) merged[idx] = seed; else merged.push(seed);
+    });
+    merged.sort((a,b)=> new Date(a.date) - new Date(b.date));
+    sessions = merged;
+    await saveSessions();
+    activeId = sessions[sessions.length-1].id;
+    render();
+  }
+  async function saveSessions(){
+    try{
+      if(hasClaudeStorage){
+        await window.storage.set('sessions', JSON.stringify(sessions), true);
+      } else {
+        localStorage.setItem('wsoc_load_sessions', JSON.stringify(sessions));
+      }
+    }catch(e){ console.error('storage save failed', e); }
+  }
+
+  function teLabel(v){
+    if(v<2) return {t:'Minor', c:'te-minor'};
+    if(v<3) return {t:'Maintaining', c:'te-maintain'};
+    if(v<4) return {t:'Improving', c:'te-improve'};
+    return {t:'Highly improving', c:'te-highimprove'};
+  }
+
+  function renderWeekSection(){
+    const groups = {};
+    sessions.forEach(s=>{
+      const wr = getWeekRange(s.date);
+      if(!groups[wr.key]) groups[wr.key] = {monday:wr.monday, sunday:wr.sunday, sessions:[]};
+      groups[wr.key].sessions.push(s);
+    });
+    const weekKeys = Object.keys(groups).sort((a,b)=> new Date(b)-new Date(a));
+    const nowWeekKey = getWeekRange(new Date().toISOString().slice(0,10)).key;
+
+    let html = `<div class="weeksec-head"><h2>Weekly overview</h2><div class="line"></div></div><div class="weekgrid">`;
+    weekKeys.forEach(k=>{
+      const g = groups[k];
+      const n = g.sessions.length;
+      const avgTrimp = Math.round(g.sessions.reduce((a,s)=>a+s.team.trimp,0)/n);
+      const avgAte = g.sessions.reduce((a,s)=>a+s.team.ate,0)/n;
+      const avgAnte = g.sessions.reduce((a,s)=>a+s.team.ante,0)/n;
+
+      const zoneTotals = {};
+      ZONE_ORDER.forEach(z=>zoneTotals[z]=0);
+      let haveSeconds = true;
+      g.sessions.forEach(s=>{
+        s.zones.forEach(z=>{
+          if(z.seconds){ zoneTotals[z.z]+= z.seconds; }
+          else { haveSeconds = false; }
+        });
+      });
+      let zoneSegs = '';
+      if(haveSeconds){
+        const totalSec = ZONE_ORDER.reduce((a,z)=>a+zoneTotals[z],0) || 1;
+        ZONE_ORDER.forEach(z=>{
+          const pct = (zoneTotals[z]/totalSec*100);
+          if(pct>0) zoneSegs += `<div style="width:${pct}%;background:${ZONE_META[z].color}" title="${z}: ${formatSeconds(zoneTotals[z])} (${pct.toFixed(0)}%)"></div>`;
+        });
+      } else {
+        ZONE_ORDER.forEach(z=>{
+          const pct = g.sessions.reduce((a,s)=>{ const zz=s.zones.find(x=>x.z===z); return a+(zz?zz.pct:0); },0)/n;
+          if(pct>0) zoneSegs += `<div style="width:${pct}%;background:${ZONE_META[z].color}" title="${z}: avg ${pct.toFixed(0)}%"></div>`;
+        });
+      }
+
+      const dateList = g.sessions.map(s=>shortDate(s.date)+(s.reportTitle?' ('+s.reportTitle+')':'')).join(' &middot; ');
+      const isCurrent = k===nowWeekKey;
+
+      html += `<div class="weekcard${isCurrent?' current':''}">
+        <div class="weekcard-title">
+          <span class="weekcard-range display">Week of ${g.monday.toLocaleDateString('en-US',{month:'short',day:'numeric'})}&ndash;${g.sunday.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>
+          <span class="weekcard-count">${n} session${n===1?'':'s'}</span>
+        </div>
+        <div class="weekcard-stats">
+          <div class="weekcard-stat"><div class="n mono">${avgTrimp}</div><div class="l">Avg TRIMP</div></div>
+          <div class="weekcard-stat"><div class="n mono">${avgAte.toFixed(1)}</div><div class="l">Avg Aerobic TE</div></div>
+          <div class="weekcard-stat"><div class="n mono">${avgAnte.toFixed(1)}</div><div class="l">Avg Anaerobic TE</div></div>
+        </div>
+        <div class="weekcard-zonebar">${zoneSegs}</div>
+        <div class="weekcard-dates">${dateList}</div>
+      </div>`;
+    });
+    html += `</div>`;
+    document.getElementById('weekSection').innerHTML = html;
+  }
+
+  function renderTabs(){
+    const bar = document.getElementById('tabbar');
+    bar.innerHTML='';
+    const ordered = [...sessions].sort((a,b)=> new Date(b.date)-new Date(a.date));
+    ordered.forEach(s=>{
+      const b = document.createElement('button');
+      b.className = 'tab' + (s.id===activeId ? ' active':'');
+      const period = sessionPeriod(s);
+      b.title = fullDate(s.date) + (s.reportTitle ? ' · '+s.reportTitle : '') + (period?' · '+period:'');
+      b.innerHTML = shortDate(s.date) + `<span class="tab-sub">${period?period+' &middot; ':''}${s.reportTitle||''}</span>`;
+      b.onclick=()=>{activeId=s.id; render();};
+      bar.appendChild(b);
+    });
+    const fit = document.createElement('button');
+    fit.className = 'tab tab-fitness' + (activeId==='fitness-test' ? ' active':'');
+    fit.innerHTML = 'Fitness Test' + `<span class="tab-sub">${fitnessTest.testLabel}</span>`;
+    fit.onclick = ()=>{activeId='fitness-test'; render();};
+    bar.appendChild(fit);
+    const add = document.createElement('button');
+    add.className='tab tab-add';
+    add.textContent='+ Add session';
+    add.onclick=openModal;
+    bar.appendChild(add);
+  }
+
+  const TREND_THRESHOLD = 25; // % change vs athlete's own last session to flag as spike/drop
+
+  const TRAINING_BASELINE_WINDOW = 3; // # of recent training sessions to average for a first-game baseline
+
+  function computeTrend(name, sessionId){
+    const idx = sessions.findIndex(x=>x.id===sessionId);
+    if(idx<=0) return null;
+    const nameKey = name.trim().toLowerCase();
+    const current = sessions[idx];
+    const curRow = current.roster.find(r=>r.name.trim().toLowerCase()===nameKey);
+    if(!curRow) return null;
+    const wantGame = !!current.isGame;
+
+    // Primary comparison: this athlete's most recent prior session of the SAME type
+    // (game vs game, training vs training) — comparing a game to the practice right
+    // before it (or vice versa) mostly just measures "games are harder than practice,"
+    // which isn't a useful spike/drop signal.
+    for(let i=idx-1;i>=0;i--){
+      if(!!sessions[i].isGame !== wantGame) continue;
+      const prevRow = sessions[i].roster.find(r=>r.name.trim().toLowerCase()===nameKey);
+      if(prevRow && prevRow.trimp>0){
+        const pct = ((curRow.trimp - prevRow.trimp)/prevRow.trimp)*100;
+        return {pct, prevTrimp:prevRow.trimp, prevDate:sessions[i].date, basis: wantGame ? 'last game' : 'last session'};
+      }
+    }
+
+    // Fallback for an athlete's first-ever game: compare against her own rolling
+    // average TRIMP over the last few full-intensity training sessions, as a "how
+    // does this game load stack up against what training has asked of her lately"
+    // baseline. Explicit taper/recovery days are excluded — they're deliberately
+    // lighter and would drag the baseline down, making every game look like an
+    // inflated spike for a reason that has nothing to do with the game itself.
+    if(wantGame){
+      const recentTrainingTrimps = [];
+      for(let i=idx-1;i>=0 && recentTrainingTrimps.length<TRAINING_BASELINE_WINDOW;i--){
+        if(sessions[i].isGame || sessions[i].isTaper) continue;
+        const prevRow = sessions[i].roster.find(r=>r.name.trim().toLowerCase()===nameKey);
+        if(prevRow && prevRow.trimp>0) recentTrainingTrimps.push(prevRow.trimp);
+      }
+      if(recentTrainingTrimps.length){
+        const avg = recentTrainingTrimps.reduce((a,b)=>a+b,0)/recentTrainingTrimps.length;
+        const pct = ((curRow.trimp - avg)/avg)*100;
+        return {pct, prevTrimp:avg, prevDate:null, basis: `${recentTrainingTrimps.length}-session training avg`};
+      }
+    }
+    return null;
+  }
+
+  function getFlagsForSession(sessionId){
+    const s = sessions.find(x=>x.id===sessionId);
+    if(!s) return [];
+    return s.roster.map(r=>{
+      const t = computeTrend(r.name, sessionId);
+      return t ? {name:r.name, pct:t.pct, trimp:r.trimp, prevTrimp:Math.round(t.prevTrimp), basis:t.basis} : null;
+    }).filter(x=>x && Math.abs(x.pct)>=TREND_THRESHOLD)
+      .sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));
+  }
+
+  function heatColor(val, min, max, hue){
+    const t = max>min ? (val-min)/(max-min) : 0.5;
+    if(hue==='trimp'){
+      return `hsla(6, 70%, ${18+t*14}%, 1)`;
+    }
+    return `hsla(166, 55%, ${16+t*16}%, 1)`;
+  }
+
+  function renderFitnessTest(){
+    const el = document.getElementById('content');
+    const withScore = fitnessTest.field.filter(a=>a.shuttles!=null).map(a=>({...a, vo2max:yoyoToVO2max(a.shuttles)}));
+    const dnr = fitnessTest.field.filter(a=>a.shuttles==null);
+    const gk = fitnessTest.gk.map(a=>({...a, vo2max:yoyoToVO2max(a.shuttles)}));
+    withScore.sort((a,b)=>b.shuttles-a.shuttles);
+    gk.sort((a,b)=>b.shuttles-a.shuttles);
+    const teamAvgShuttles = withScore.reduce((s,a)=>s+a.shuttles,0)/withScore.length;
+    const teamAvgVO2 = yoyoToVO2max(teamAvgShuttles);
+    const gkAvgShuttles = gk.reduce((s,a)=>s+a.shuttles,0)/gk.length;
+    const gkAvgVO2 = yoyoToVO2max(gkAvgShuttles);
+    const allVO2 = [...withScore, ...gk].map(a=>a.vo2max);
+    const minV = Math.min(...allVO2), maxV = Math.max(...allVO2);
+
+    let html = `<p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:18px;margin:0 0 4px;color:var(--text);">${fitnessTest.testLabel} &middot; ${fitnessTest.testType}</p>`;
+
+    html += `<div class="fit-note">Estimated VO2max is calculated from Yo-Yo IR1 shuttles using the Bangsbo, Iaia &amp; Krustrup (2008) formula: distance (shuttles &times; 40m) &times; 0.0084 + 36.4. This is a field estimate, not a lab-measured value &mdash; useful for ranking and tracking change over time, not as a clinical number.</div>`;
+
+    html += `<div class="stats" style="grid-template-columns:repeat(2,1fr);margin-bottom:24px;">
+      <div class="stat"><p class="stat-label">Team Avg Shuttles (Field)</p><p class="stat-value">${teamAvgShuttles.toFixed(1)}</p><p class="stat-scale">Est. VO2max ${teamAvgVO2.toFixed(1)} ml/kg/min</p></div>
+      <div class="stat"><p class="stat-label">GK Avg Shuttles</p><p class="stat-value">${gkAvgShuttles.toFixed(1)}</p><p class="stat-scale">Est. VO2max ${gkAvgVO2.toFixed(1)} ml/kg/min</p></div>
+    </div>`;
+
+    html += `<div class="fitgroup-label">Field players</div>`;
+    html += `<table><thead><tr><th>Athlete</th><th>Shuttles</th><th>Est. VO2max</th></tr></thead><tbody>`;
+    withScore.forEach((a,i)=>{
+      html += `<tr><td><span class="rank">${i+1}</span>&nbsp; ${a.name}</td><td class="num mono">${a.shuttles}</td>
+        <td class="num"><span class="heatcell vo2cell" style="background:${heatColor(a.vo2max,minV,maxV,'ate')}">${a.vo2max.toFixed(1)}</span></td></tr>`;
+    });
+    dnr.forEach(a=>{
+      html += `<tr><td>${a.name}</td><td class="num mono dnr">DNR</td><td class="num mono dnr">&mdash;</td></tr>`;
+    });
+    html += `</tbody></table>`;
+
+    html += `<div class="fitgroup-label">Goalkeepers</div>`;
+    html += `<table><thead><tr><th>Athlete</th><th>Shuttles</th><th>Est. VO2max</th></tr></thead><tbody>`;
+    gk.forEach((a,i)=>{
+      html += `<tr><td><span class="rank">${i+1}</span>&nbsp; ${a.name}</td><td class="num mono">${a.shuttles}</td>
+        <td class="num"><span class="heatcell vo2cell" style="background:${heatColor(a.vo2max,minV,maxV,'ate')}">${a.vo2max.toFixed(1)}</span></td></tr>`;
+    });
+    html += `</tbody></table>`;
+
+    html += `<p class="footer-note">GK results are tracked separately since goalkeeper training demands differ from field players. DNR = did not run. Retesting periodically will let this trend over the season rather than stay a single snapshot.</p>`;
+
+    el.innerHTML = html;
+  }
+
+  function getVO2max(name){
+    const nameKey = name.trim().toLowerCase();
+    const a = fitnessTest.field.find(x=>x.name.trim().toLowerCase()===nameKey) ||
+              fitnessTest.gk.find(x=>x.name.trim().toLowerCase()===nameKey);
+    if(!a || a.shuttles==null) return null;
+    return yoyoToVO2max(a.shuttles);
+  }
+
+  function getSeasonStats(name){
+    const nameKey = name.trim().toLowerCase();
+    const trimpVals = [], epocVals = [], moveVals = [];
+    sessions.forEach(s=>{
+      const row = s.roster.find(r=>r.name.trim().toLowerCase()===nameKey);
+      if(row){
+        trimpVals.push(row.trimp);
+        if(row.epoc!=null) epocVals.push(row.epoc);
+        if(row.moveload!=null) moveVals.push(row.moveload);
+      }
+    });
+    const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : null;
+    return {
+      sessionsLogged: trimpVals.length,
+      avgTrimp: avg(trimpVals),
+      avgEpoc: avg(epocVals),
+      avgMoveload: avg(moveVals)
+    };
+  }
+
+  function render(){
+    renderWeekSection();
+    renderTabs();
+    if(activeId==='fitness-test'){ renderFitnessTest(); return; }
+    const s = sessions.find(x=>x.id===activeId);
+    const el = document.getElementById('content');
+    if(!s){ el.innerHTML='<p>No sessions yet.</p>'; return; }
+
+    const ate = teLabel(s.team.ate), ante = teLabel(s.team.ante);
+
+    let html = '';
+    html += `<p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:18px;margin:0 0 16px;color:var(--text);">
+      ${fullDate(s.date)}${s.reportTitle ? ` <span style="color:var(--text-dim);font-weight:500;font-size:14px;">&middot; ${s.reportTitle}${sessionPeriod(s)?' &middot; '+sessionPeriod(s)+' session':''}</span>`:''}
+    </p>`;
+
+    const durationSecForStats = parseDuration(s.duration);
+    const trimpPerMin = durationSecForStats ? (s.team.trimp/(durationSecForStats/60)) : null;
+    const moveloadRows = s.roster.filter(r=>r.moveload!=null);
+    const avgMoveload = moveloadRows.length ? moveloadRows.reduce((a,r)=>a+r.moveload,0)/moveloadRows.length : null;
+
+    html += `<div class="stats">
+      <div class="stat"><p class="stat-label">Team TRIMP</p><p class="stat-value">${s.team.trimp}</p></div>
+      <div class="stat"><p class="stat-label">TRIMP / min</p><p class="stat-value">${trimpPerMin?trimpPerMin.toFixed(2):'&mdash;'}</p></div>
+      <div class="stat"><p class="stat-label">Aerobic TE</p><p class="stat-value">${s.team.ate.toFixed(1)}</p><p class="stat-scale ${ate.c}">${ate.t}</p></div>
+      <div class="stat"><p class="stat-label">Anaerobic TE</p><p class="stat-value">${s.team.ante.toFixed(1)}</p><p class="stat-scale ${ante.c}">${ante.t}</p></div>
+      ${s.team.epoc?`<div class="stat"><p class="stat-label">EPOC</p><p class="stat-value">${s.team.epoc}</p><p class="stat-scale">recovery demand</p></div>`:''}
+      ${avgMoveload?`<div class="stat"><p class="stat-label">Avg MoveLoad</p><p class="stat-value">${avgMoveload.toFixed(0)}</p><p class="stat-scale">mechanical load</p></div>`:''}
+      <div class="stat"><p class="stat-label">Duration</p><p class="stat-value" style="font-size:22px">${s.duration}</p><p class="stat-scale">${s.start} &ndash; ${s.end}</p></div>
+      <div class="stat"><p class="stat-label">Athletes</p><p class="stat-value">${s.athletes}</p><p class="stat-scale">${s.sport} &middot; ${s.type}</p></div>
+    </div>`;
+
+    if(s.alerts && s.alerts.length){
+      html += `<div class="alerts">`;
+      s.alerts.forEach(a=>{
+        html += `<div class="alert-chip"><span class="alert-dot"></span><span class="alert-name">${a.name}</span>
+          <span class="alert-delta">new max HR &middot; ${a.from} &rarr; <b>${a.to}</b> bpm</span></div>`;
+      });
+      html += `</div>`;
+    }
+
+    const flags = getFlagsForSession(s.id);
+    if(flags.length){
+      const flagSubtitle = s.isGame ? "vs. last game (or recent training avg, before her first game)" : "vs. each athlete's last training session";
+      html += `<div class="section" style="margin-bottom:20px;"><p class="section-title">Load flags &middot; ${flagSubtitle}</p><div class="flags">`;
+      flags.forEach(f=>{
+        const isSpike = f.pct>=0;
+        html += `<div class="flag-chip ${isSpike?'spike':'drop'}" title="vs ${f.basis}"><span class="flag-name">${f.name}</span>
+          <span class="flag-detail">${f.prevTrimp} &rarr; <b>${f.trimp}</b> TRIMP &middot; ${isSpike?'+':''}${f.pct.toFixed(0)}%</span></div>`;
+      });
+      html += `</div></div>`;
+    }
+
+    html += `<div class="section"><p class="section-title">Time in heart rate zones</p>`;
+    html += `<div class="zonebar">`;
+    s.zones.forEach(z=>{
+      const meta = ZONE_META[z.z];
+      html += `<div class="zoneseg" style="width:${z.pct}%;background:${meta.color}" title="${z.z} ${meta.label}: ${formatSeconds(z.seconds||0)} (${z.pct}%)">${z.pct>=8?z.pct+'%':''}</div>`;
+    });
+    html += `</div><div class="zonelegend">`;
+    s.zones.forEach(z=>{
+      const meta = ZONE_META[z.z];
+      html += `<div class="zli"><span class="zsw" style="background:${meta.color}"></span>${z.z} &middot; ${meta.label} &middot; ${formatSeconds(z.seconds||0)} (${z.pct}%)</div>`;
+    });
+    html += `</div></div>`;
+
+    html += `<div class="twocol">`;
+    if(s.positions && s.positions.length){
+      html += `<div class="posgroup"><h4>Load by position</h4>`;
+      const maxTrimpPos = Math.max(...s.positions.map(p=>p.trimp));
+      s.positions.forEach(p=>{
+        html += `<div class="posbar-row"><span class="mono">${p.pos}</span>
+          <div class="posbar-track"><div class="posbar-fill" style="width:${(p.trimp/maxTrimpPos*100).toFixed(0)}%;background:var(--accent)"></div></div>
+          <span class="mono num" style="text-align:right">${p.trimp}</span></div>`;
+      });
+      html += `<div style="display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--text-dim);flex-wrap:wrap">`;
+      s.positions.forEach(p=>{ html += `<div>${p.pos} &middot; ATE ${p.ate.toFixed(1)} &middot; ANTE ${p.ante.toFixed(1)}</div>`; });
+      html += `</div></div>`;
+    } else {
+      html += `<div class="posgroup"><h4>Load by position</h4><p style="color:var(--text-dimmer);font-size:12px">No position breakdown entered for this session.</p></div>`;
+    }
+
+    html += `<div class="trendwrap"><h4 style="margin:0 0 12px;font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;">Team TRIMP across sessions</h4>`;
+    const maxAll = Math.max(...sessions.map(x=>x.team.trimp));
+    html += `<div style="display:flex;align-items:flex-end;gap:10px;height:110px;">`;
+    sessions.forEach(x=>{
+      const h = Math.max(6, (x.team.trimp/maxAll*100));
+      const isActive = x.id===s.id;
+      html += `<div style="display:flex;flex-direction:column;align-items:center;flex:1;gap:6px;">
+        <span class="mono" style="font-size:11px;color:${isActive?'var(--accent)':'var(--text-dimmer)'}">${x.team.trimp}</span>
+        <div style="width:100%;height:${h}px;border-radius:4px 4px 0 0;background:${isActive?'var(--accent)':'var(--surface-2)'};border:1px solid ${isActive?'var(--accent)':'var(--border)'}"></div>
+        <span style="font-size:10px;color:var(--text-dim);text-align:center;line-height:1.4;">${shortDate(x.date)}${x.reportTitle?`<br><span style="font-size:9px;color:var(--text-dimmer)">${x.reportTitle}</span>`:''}</span>
+      </div>`;
+    });
+    html += `</div></div>`;
+    html += `</div>`;
+
+    const roster = s.roster.map(r=>{
+      const vo2max = getVO2max(r.name);
+      return {...r, trend: computeTrend(r.name, s.id), vo2max, loadIndex: vo2max ? r.trimp/vo2max : null};
+    });
+    const key = sortState.key, dir = sortState.dir;
+    roster.sort((a,b)=>{
+      let av, bv;
+      if(key==='name'){ av=a.name.toLowerCase(); bv=b.name.toLowerCase(); }
+      else if(key==='trend'){ av = a.trend ? a.trend.pct : -9999; bv = b.trend ? b.trend.pct : -9999; }
+      else if(key==='epoc'){ av = a.epoc!=null ? a.epoc : -9999; bv = b.epoc!=null ? b.epoc : -9999; }
+      else if(key==='moveload'){ av = a.moveload!=null ? a.moveload : -9999; bv = b.moveload!=null ? b.moveload : -9999; }
+      else if(key==='loadIndex'){ av = a.loadIndex!=null ? a.loadIndex : -9999; bv = b.loadIndex!=null ? b.loadIndex : -9999; }
+      else { av = a[key]; bv = b[key]; }
+      if(av<bv) return dir==='asc'?-1:1;
+      if(av>bv) return dir==='asc'?1:-1;
+      return 0;
+    });
+    const trimpVals = roster.map(r=>r.trimp);
+    const minT = Math.min(...trimpVals), maxT = Math.max(...trimpVals);
+
+    const hasEpoc = roster.some(r=>r.epoc!=null);
+    const moveloadVals = roster.filter(r=>r.moveload!=null).map(r=>r.moveload);
+    const hasMoveload = moveloadVals.length>0;
+    const loadIdxVals = roster.filter(r=>r.loadIndex!=null).map(r=>r.loadIndex);
+    const hasVO2 = loadIdxVals.length>0;
+    const minIdx = hasVO2 ? Math.min(...loadIdxVals) : 0, maxIdx = hasVO2 ? Math.max(...loadIdxVals) : 1;
+    html += `<div class="section"><p class="section-title">Athlete load &middot; ${shortDate(s.date)}</p>
+      <table><thead><tr>
+        <th data-key="name" class="${key==='name'?'sorted':''}">Athlete</th>
+        <th data-key="trimp" class="${key==='trimp'?'sorted':''}">TRIMP</th>
+        <th data-key="ate" class="${key==='ate'?'sorted':''}">Aerobic TE</th>
+        <th data-key="ante" class="${key==='ante'?'sorted':''}">Anaerobic TE</th>
+        ${hasEpoc?`<th data-key="epoc" class="${key==='epoc'?'sorted':''}">EPOC</th>`:''}
+        ${hasMoveload?`<th data-key="moveload" class="${key==='moveload'?'sorted':''}">MoveLoad</th>`:''}
+        ${hasVO2?`<th data-key="loadIndex" class="${key==='loadIndex'?'sorted':''}" title="TRIMP &divide; estimated VO2max">vs VO2max</th>`:''}
+        <th data-key="trend" class="${key==='trend'?'sorted':''}">Trend</th>
+      </tr></thead><tbody>`;
+    roster.forEach((r,i)=>{
+      let trendHtml;
+      if(!r.trend){
+        trendHtml = `<span class="trend-badge trend-new">new</span>`;
+      } else {
+        const pct = r.trend.pct;
+        const cls = pct>=TREND_THRESHOLD ? 'trend-spike' : (pct<=-TREND_THRESHOLD ? 'trend-drop' : 'trend-normal');
+        const arrow = pct>1 ? '&#9650;' : (pct<-1 ? '&#9660;' : '&ndash;');
+        trendHtml = `<span class="trend-badge ${cls}" title="vs ${r.trend.basis}: ${Math.round(r.trend.prevTrimp)} TRIMP${r.trend.prevDate?` (${shortDate(r.trend.prevDate)})`:''}">${arrow} ${pct>0?'+':''}${pct.toFixed(0)}%</span>`;
+      }
+      html += `<tr><td><span class="rank">${i+1}</span>&nbsp; ${r.name}</td>
+        <td class="num"><span class="heatcell mono" style="background:${heatColor(r.trimp,minT,maxT,'trimp')}">${r.trimp}</span></td>
+        <td class="num mono">${r.ate.toFixed(1)}</td>
+        <td class="num mono">${r.ante.toFixed(1)}</td>
+        ${hasEpoc?`<td class="epoc-cell">${r.epoc!=null?r.epoc:'&mdash;'}</td>`:''}
+        ${hasMoveload?`<td class="epoc-cell">${r.moveload!=null?r.moveload:'&mdash;'}</td>`:''}
+        ${hasVO2?`<td class="num">${r.loadIndex!=null?`<span class="heatcell mono" style="background:${heatColor(r.loadIndex,minIdx,maxIdx,'trimp')}" title="Est. VO2max ${r.vo2max.toFixed(1)}">${r.loadIndex.toFixed(2)}</span>`:'<span class="epoc-cell">&mdash;</span>'}</td>`:''}
+        <td class="num">${trendHtml}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+
+    html += `<p class="footer-note">Data sourced from Firstbeat team reports (${fullDate(s.date)}${s.reportTitle? ', '+s.reportTitle:''}). TRIMP and Training Effect reflect the full session; sub-drill splits from the source report are not broken out here. Trend compares each athlete's TRIMP to her own most recent prior session of the same kind &mdash; game vs. her last game, training vs. her last training day &mdash; so a game day isn't flagged as a "spike" just for being harder than practice. Before a second game exists, game trend falls back to her rolling ${TRAINING_BASELINE_WINDOW}-session training average (taper/recovery days are excluded from that average since they're deliberately lighter). Hover a trend badge to see what it's compared against. &plusmn;${TREND_THRESHOLD}% is flagged as a spike or drop. "vs VO2max" is TRIMP &divide; estimated VO2max (Yo-Yo IR1) &mdash; higher means she's working closer to her own aerobic ceiling than a teammate with the same TRIMP but more capacity; it's a ranking heuristic, not a validated measure. Click a column header to sort.</p>`;
+
+    if(!seedSessions.find(x=>x.id===s.id)){
+      html += `<div style="margin-top:10px"><button class="btn btn-danger" id="btnDelete">Delete this session</button></div>`;
+    }
+
+    el.innerHTML = html;
+
+    el.querySelectorAll('thead th').forEach(th=>{
+      th.onclick = ()=>{
+        const k = th.getAttribute('data-key');
+        if(sortState.key===k){ sortState.dir = sortState.dir==='asc'?'desc':'asc'; }
+        else { sortState = {key:k, dir:'desc'}; }
+        render();
+      };
+    });
+    const del = document.getElementById('btnDelete');
+    if(del) del.onclick = ()=>{
+      sessions = sessions.filter(x=>x.id!==s.id);
+      activeId = sessions.length ? sessions[sessions.length-1].id : null;
+      saveSessions();
+      render();
+    };
+  }
+
+  function openModal(){
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+  function closeModal(){
+    document.getElementById('modalOverlay').classList.remove('open');
+    ['f-date','f-reporttitle','f-sport','f-athletes','f-duration','f-type','f-trimp','f-ate','f-ante','f-z5','f-z4','f-z3','f-z2','f-z1','f-athleterows']
+      .forEach(id=>document.getElementById(id).value='');
+    document.getElementById('f-isgame').checked = false;
+    document.getElementById('f-istaper').checked = false;
+  }
+  document.getElementById('btnCancel').onclick = closeModal;
+  document.getElementById('modalOverlay').addEventListener('click', (e)=>{ if(e.target.id==='modalOverlay') closeModal(); });
+
+  document.getElementById('btnSave').onclick = ()=>{
+    const g = id=>document.getElementById(id).value;
+    const date = g('f-date');
+    if(!date){ alert('Enter the session date — sessions are found by date.'); return; }
+    const durationStr = g('f-duration')||'';
+    const durationSec = parseDuration(durationStr);
+    const roster = g('f-athleterows').split('\n').map(l=>l.trim()).filter(Boolean).map(line=>{
+      const parts = line.split(',').map(p=>p.trim());
+      return {name:parts[0]||'Unnamed', trimp:Number(parts[1])||0, ate:Number(parts[2])||0, ante:Number(parts[3])||0};
+    });
+    const pcts = {Z5:Number(g('f-z5'))||0, Z4:Number(g('f-z4'))||0, Z3:Number(g('f-z3'))||0, Z2:Number(g('f-z2'))||0, Z1:Number(g('f-z1'))||0};
+    const zones = ZONE_ORDER.map(z=>({z, pct:pcts[z], seconds: durationSec ? Math.round(durationSec*pcts[z]/100) : 0}));
+
+    const newSession = {
+      id: date,
+      date, reportTitle: g('f-reporttitle')||'', sport: g('f-sport')||'—',
+      athletes: Number(g('f-athletes'))|| roster.length,
+      start:'—', end:'—', duration: durationStr||'—', type: g('f-type')||'Training',
+      isGame: document.getElementById('f-isgame').checked,
+      isTaper: document.getElementById('f-istaper').checked,
+      team:{ trimp:Number(g('f-trimp'))||0, ate:Number(g('f-ate'))||0, ante:Number(g('f-ante'))||0 },
+      zones,
+      positions: [],
+      alerts: [],
+      roster
+    };
+    const existingIdx = sessions.findIndex(x=>x.id===newSession.id);
+    if(existingIdx>=0) sessions[existingIdx] = newSession; else sessions.push(newSession);
+    sessions.sort((a,b)=> new Date(a.date)-new Date(b.date));
+    activeId = newSession.id;
+    saveSessions();
+    closeModal();
+    render();
+  };
+
+  loadSessions();
+})();
+</script>
