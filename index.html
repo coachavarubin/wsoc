@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -65,7 +66,7 @@
   .weekcard-zonebar{display:flex;height:14px;border-radius:5px;overflow:hidden;border:1px solid var(--border);margin-bottom:8px;}
   .weekcard-dates{font-size:11px;color:var(--text-dimmer);}
 
-  /* tabs (legacy, unused since nav became a dropdown — left for safety) */
+  /* tabs (legacy, unused since nav became a dropdown -- left for safety) */
   .tabbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
   .tab{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.03em;background:var(--surface);
     border:1px solid var(--border);color:var(--text-dim);padding:9px 16px;border-radius:8px;cursor:pointer;transition:all .15s ease;text-align:left;line-height:1.2;}
@@ -183,18 +184,22 @@
 
 
   /* branded header */
-  .brandbar{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  .brandbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
     background:linear-gradient(120deg,var(--csu-near-black),#0F1D16 55%,var(--csu-green-deep));
     border:1px solid var(--csu-near-black);border-bottom:3px solid var(--gold);
     border-radius:12px;padding:14px 20px;margin-bottom:20px;box-shadow:var(--shadow-md);}
-  .brandbar-left{display:flex;align-items:center;gap:14px;}
+  .brandbar-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0;}
   .brandbar img.mascot{width:44px;height:44px;object-fit:contain;flex:none;background:#FFFFFF;border-radius:8px;padding:4px;}
   .brandbar img.wordmark{height:30px;width:auto;object-fit:contain;flex:none;background:#FFFFFF;border-radius:8px;padding:6px 10px;}
   .brandbar-divider{width:1px;height:30px;background:rgba(234,209,179,0.3);flex:none;}
   .brandbar-sub{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.08em;
-    text-transform:uppercase;color:var(--csu-cream);text-align:right;}
+    text-transform:uppercase;color:var(--csu-cream);text-align:right;min-width:0;}
   .brandbar-sub span{display:block;font-family:'JetBrains Mono',monospace;font-weight:400;font-size:10px;
     letter-spacing:0.05em;color:rgba(234,209,179,0.65);text-transform:none;margin-top:2px;}
+  @media(max-width:600px){
+    .brandbar{padding:12px 16px;flex-direction:column;align-items:flex-start;}
+    .brandbar-sub{text-align:left;font-size:11px;}
+  }
 
   /* mode toggle + session picker nav */
   .navrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px;}
@@ -215,6 +220,13 @@
     background-repeat:no-repeat;background-position:right 12px center;padding-right:30px;}
   select.sessionselect:hover{border-color:var(--accent-dim);}
   .navrow-add{margin-left:auto;flex:none;}
+  @media(max-width:600px){
+    .navrow{flex-direction:column;align-items:stretch;}
+    .navrow-picker{min-width:0;width:100%;}
+    .navrow-add{margin-left:0;width:100%;}
+    .navrow-add .btn{width:100%;}
+    .modetoggle{align-self:flex-start;}
+  }
 
   /* jump testing view */
   .jumpstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
@@ -967,6 +979,29 @@
         {name:'Ryleigh Alcala',trimp:186,ate:3.8,ante:3.5},
         {name:'Madi Wright',trimp:218,ate:4.6,ante:2.9},
       ]
+    },
+    {
+      id:'2026-08-11', date:'2026-08-11', reportTitle:'Team Training', sport:'Football', athletes:19,
+      start:'9:28:26 AM', end:'11:35:58 AM', duration:'02:07:32', type:'Training',
+      team:{trimp:74, ate:2.4, ante:1.5},
+      zones:[{z:'Z5',seconds:100,pct:1},{z:'Z4',seconds:438,pct:6},{z:'Z3',seconds:779,pct:10},{z:'Z2',seconds:1153,pct:15},{z:'Z1',seconds:1896,pct:25}],
+      positions:[{pos:'CB',trimp:62,ate:2.1,ante:0.6},{pos:'W',trimp:58,ate:2.4,ante:1.9},{pos:'AM',trimp:62,ate:2.4,ante:1.7},{pos:'CF',trimp:111,ate:2.8,ante:2.0},{pos:'DM',trimp:85,ate:2.4,ante:2.1},{pos:'OB',trimp:58,ate:1.8,ante:1.0}],
+      alerts:[],
+      roster:[
+        {name:'Lauryn Hancock',trimp:27,ate:1.3,ante:0.8},
+        {name:'Valentina Barrera',trimp:49,ate:2.3,ante:1.7},
+        {name:'Sophie Abbott',trimp:50,ate:2.3,ante:2.0},
+        {name:'Ava Gzym',trimp:61,ate:2.7,ante:1.5},
+        {name:'Carly Stinson',trimp:62,ate:2.1,ante:0.6},
+        {name:'Alicia Rierbich',trimp:62,ate:2.1,ante:1.2},
+        {name:'Cortlyn Hefty',trimp:64,ate:2.2,ante:0.5},
+        {name:'Sidney Nicholas',trimp:68,ate:2.5,ante:2.0},
+        {name:'Olivia Lewis',trimp:75,ate:2.5,ante:2.1},
+        {name:'Olivia Cruz',trimp:85,ate:2.4,ante:2.1},
+        {name:'Emilee Tonkovich',trimp:89,ate:2.3,ante:1.1},
+        {name:'Shanti Atkins',trimp:98,ate:2.6,ante:2.5},
+        {name:'Madi Wright',trimp:173,ate:3.6,ante:3.0},
+      ]
     }
   ];
 
@@ -1090,6 +1125,29 @@
       {name:'True Benshoff', j1:16.5, j2:17.2, j3:16.3, best:17.2},
       {name:'Valentina Barrera', j1:14, j2:14.8, j3:15.4, best:15.4},
     ]},
+    { id:'2026-08-11', date:'2026-08-11', label:'Test 6', phase:'preseason', roster:[
+        {name:'Alicia Rierbich', j1:15.7, j2:16.4, j3:16.6, best:16.6},
+        {name:'Ava Gzym', j1:14.5, j2:13.2, j3:14.4, best:14.5},
+        {name:'Carly Stinson', j1:15.9, j2:14.9, j3:13.9, best:15.9},
+        {name:'Elise Boyd', j1:19.2, j2:18.7, j3:null, best:19.2},
+        {name:'Emilee Tonkovich', j1:16.8, j2:15.4, j3:16.8, best:16.8},
+        {name:'Hayleigh Lewis', j1:18.6, j2:18.9, j3:18.8, best:18.9},
+        {name:'Kyleigh Bathe', j1:16.4, j2:16.3, j3:15.6, best:16.4},
+        {name:'Lauryn Hancock', j1:17.9, j2:16.9, j3:17.5, best:17.9},
+        {name:'Madi Wright', j1:16.1, j2:18, j3:15.5, best:18},
+        {name:'Nikki Miskovic', j1:18.3, j2:17.6, j3:17, best:18.3},
+        {name:'Olivia Lewis', j1:15.6, j2:15, j3:15.3, best:15.6},
+        {name:'Olivia Cruz', j1:17.2, j2:16.4, j3:15.5, best:17.2},
+        {name:'Ruari Dever', j1:12.8, j2:13.3, j3:12.8, best:13.3},
+        {name:'Ryleigh Alcala', j1:19.4, j2:18.7, j3:19.2, best:19.4},
+        {name:'Shanti Atkins', j1:15.5, j2:14.8, j3:14, best:15.5},
+        {name:'Sidney Nicholas', j1:18.1, j2:18.7, j3:18.9, best:18.9},
+        {name:'Sophie Abbott', j1:16.5, j2:16.4, j3:15.6, best:16.5},
+        {name:'Summer Swords', j1:15.6, j2:14.8, j3:14.8, best:15.6},
+        {name:'Tea Optiz', j1:18.2, j2:17.9, j3:16.4, best:18.2},
+        {name:'True Benshoff', j1:17.1, j2:16.6, j3:18.2, best:18.2},
+        {name:'Valentina Barrera', j1:14.1, j2:14.3, j3:14, best:14.3},
+    ]},
   ];
 
   function yoyoToVO2max(shuttles){
@@ -1127,7 +1185,7 @@
     ],
     gk: [
       {name:'Hayleigh Lewis', shuttles:39},
-      {name:'Téa Optiz', shuttles:27},
+      {name:'T\u00e9a Optiz', shuttles:27},
       {name:'Summer Swords', shuttles:26},
     ]
   };
@@ -1167,12 +1225,12 @@
   }
 
   function shortDate(dateStr){
-    if(!dateStr) return '—';
+    if(!dateStr) return '\u2014';
     const d = new Date(dateStr+'T00:00:00');
     return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
   }
   function fullDate(dateStr){
-    if(!dateStr) return '—';
+    if(!dateStr) return '\u2014';
     const d = new Date(dateStr+'T00:00:00');
     return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   }
@@ -1333,13 +1391,13 @@
         const opt = document.createElement('option');
         opt.value = s.id;
         const period = sessionPeriod(s);
-        opt.textContent = `${shortDate(s.date)} · ${s.reportTitle||s.type}${period?' · '+period:''}`;
+        opt.textContent = `${shortDate(s.date)} \u00b7 ${s.reportTitle||s.type}${period?' \u00b7 '+period:''}`;
         if(s.id===activeId) opt.selected = true;
         select.appendChild(opt);
       });
       const fitOpt = document.createElement('option');
       fitOpt.value = 'fitness-test';
-      fitOpt.textContent = `Fitness Test · ${fitnessTest.testLabel}`;
+      fitOpt.textContent = `Fitness Test \u00b7 ${fitnessTest.testLabel}`;
       if(activeId==='fitness-test') fitOpt.selected = true;
       select.appendChild(fitOpt);
       select.onchange = ()=>{ activeId = select.value; render(); };
@@ -1354,7 +1412,7 @@
       ordered.forEach(js=>{
         const opt = document.createElement('option');
         opt.value = js.id;
-        opt.textContent = `${shortDate(js.date)} · ${js.label}`;
+        opt.textContent = `${shortDate(js.date)} \u00b7 ${js.label}`;
         if(js.id===activeJumpId) opt.selected = true;
         select.appendChild(opt);
       });
@@ -1396,7 +1454,7 @@
 
     // Compare against this athlete's own rolling average TRIMP over her last few
     // sessions of the SAME type (game vs games, training vs training). A single
-    // prior session is noisy — one light or heavy day skews the read — and comparing
+    // prior session is noisy -- one light or heavy day skews the read -- and comparing
     // a game to the practice right before it (or vice versa) mostly just measures
     // "games are harder than practice," which isn't a useful spike/drop signal.
     // Explicit taper/recovery days are excluded from the average: they're
@@ -1457,7 +1515,7 @@
     return `hsla(166, 55%, ${16+t*16}%, 1)`;
   }
 
-  const JUMP_STATUS_THRESHOLD = 0.5; // inches — matches the status threshold used in the OVR jump tracker
+  const JUMP_STATUS_THRESHOLD = 0.5; // inches -- matches the status threshold used in the OVR jump tracker
 
   function jumpChronoList(){
     return [...jumpSessions].sort((a,b)=> new Date(a.date)-new Date(b.date));
@@ -1476,7 +1534,7 @@
     return vals.reduce((a,b)=>a+b,0)/vals.length;
   }
 
-  // Running preseason average per athlete *as of a given test* — average of her preseason
+  // Running preseason average per athlete *as of a given test* -- average of her preseason
   // Best Jumps strictly BEFORE the given index, so today's test is judged against where she's
   // been so far rather than against just the single prior test.
   function jumpRunningBaseline(name, idx, chrono){
@@ -1515,7 +1573,7 @@
 
     if(current.phase==='preseason'){
       const base = jumpRunningBaseline(name, idx, chrono);
-      if(base==null) return null; // her first-ever test — nothing to compare to yet
+      if(base==null) return null; // her first-ever test -- nothing to compare to yet
       return {delta: curRow.best-base, prevVal: base, basis:'vs preseason avg so far'};
     } else {
       const base = jumpBaseline(name);
@@ -1580,7 +1638,7 @@
 
     const roster = js.roster.map(r=>{
       const trend = computeJumpTrend(r.name, js.id);
-      return {...r, trend, trendDelta: trend ? trend.delta : null, allTimeBest: jumpAllTimeBest(r.name)};
+      return Object.assign({}, r, {trend, trendDelta: trend ? trend.delta : null, allTimeBest: jumpAllTimeBest(r.name)});
     });
     const key = jumpSortState.key, dir = jumpSortState.dir;
     roster.sort((a,b)=>{
@@ -1639,9 +1697,9 @@
 
   function renderFitnessTest(){
     const el = document.getElementById('content');
-    const withScore = fitnessTest.field.filter(a=>a.shuttles!=null).map(a=>({...a, vo2max:yoyoToVO2max(a.shuttles)}));
+    const withScore = fitnessTest.field.filter(a=>a.shuttles!=null).map(a=>Object.assign({}, a, {vo2max:yoyoToVO2max(a.shuttles)}));
     const dnr = fitnessTest.field.filter(a=>a.shuttles==null);
-    const gk = fitnessTest.gk.map(a=>({...a, vo2max:yoyoToVO2max(a.shuttles)}));
+    const gk = fitnessTest.gk.map(a=>Object.assign({}, a, {vo2max:yoyoToVO2max(a.shuttles)}));
     withScore.sort((a,b)=>b.shuttles-a.shuttles);
     gk.sort((a,b)=>b.shuttles-a.shuttles);
     const teamAvgShuttles = withScore.reduce((s,a)=>s+a.shuttles,0)/withScore.length;
@@ -1661,7 +1719,7 @@
     </div>`;
 
     html += `<div class="fitgroup-label">Field players</div>`;
-    html += `<table><thead><tr><th>Athlete</th><th>Shuttles</th><th>Est. VO2max</th></tr></thead><tbody>`;
+    html += `<table><thead><tr><th>Athlete</th><th class="num">Shuttles</th><th class="num">Est. VO2max</th></tr></thead><tbody>`;
     withScore.forEach((a,i)=>{
       html += `<tr><td><span class="rank">${i+1}</span>&nbsp; ${a.name}</td><td class="num mono">${a.shuttles}</td>
         <td class="num"><span class="heatcell vo2cell" style="background:${heatColor(a.vo2max,minV,maxV,'ate')}">${a.vo2max.toFixed(1)}</span></td></tr>`;
@@ -1672,7 +1730,7 @@
     html += `</tbody></table>`;
 
     html += `<div class="fitgroup-label">Goalkeepers</div>`;
-    html += `<table><thead><tr><th>Athlete</th><th>Shuttles</th><th>Est. VO2max</th></tr></thead><tbody>`;
+    html += `<table><thead><tr><th>Athlete</th><th class="num">Shuttles</th><th class="num">Est. VO2max</th></tr></thead><tbody>`;
     gk.forEach((a,i)=>{
       html += `<tr><td><span class="rank">${i+1}</span>&nbsp; ${a.name}</td><td class="num mono">${a.shuttles}</td>
         <td class="num"><span class="heatcell vo2cell" style="background:${heatColor(a.vo2max,minV,maxV,'ate')}">${a.vo2max.toFixed(1)}</span></td></tr>`;
@@ -1802,7 +1860,7 @@
     sessions.forEach(x=>{
       const h = Math.max(4, Math.round(x.team.trimp/maxAll*MAX_BAR_PX));
       const isActive = x.id===s.id;
-      html += `<div style="display:flex;flex-direction:column;align-items:center;flex:none;width:46px;gap:4px;" title="${fullDate(x.date)}${x.reportTitle?' · '+x.reportTitle:''}">
+      html += `<div style="display:flex;flex-direction:column;align-items:center;flex:none;width:46px;gap:4px;" title="${fullDate(x.date)}${x.reportTitle?' \u00b7 '+x.reportTitle:''}">
         <span class="mono" style="font-size:10.5px;color:${isActive?'var(--accent)':'var(--text-dimmer)'}">${x.team.trimp}</span>
         <div style="width:100%;height:${h}px;border-radius:4px 4px 0 0;background:${isActive?'var(--accent)':'var(--surface-2)'};border:1px solid ${isActive?'var(--accent)':'var(--border)'}"></div>
         <span style="font-size:9.5px;color:var(--text-dim);text-align:center;line-height:1.3;white-space:nowrap;">${shortDate(x.date)}</span>
@@ -1813,7 +1871,7 @@
 
     const roster = s.roster.map(r=>{
       const vo2max = getVO2max(r.name);
-      return {...r, trend: computeTrend(r.name, s.id), vo2max, loadIndex: vo2max ? r.trimp/vo2max : null};
+      return Object.assign({}, r, {trend: computeTrend(r.name, s.id), vo2max, loadIndex: vo2max ? r.trimp/vo2max : null});
     });
     const key = sortState.key, dir = sortState.dir;
     roster.sort((a,b)=>{
@@ -1914,7 +1972,7 @@
   document.getElementById('btnSave').onclick = ()=>{
     const g = id=>document.getElementById(id).value;
     const date = g('f-date');
-    if(!date){ alert('Enter the session date — sessions are found by date.'); return; }
+    if(!date){ alert('Enter the session date \u2014 sessions are found by date.'); return; }
     const durationStr = g('f-duration')||'';
     const durationSec = parseDuration(durationStr);
     const roster = g('f-athleterows').split('\n').map(l=>l.trim()).filter(Boolean).map(line=>{
@@ -1926,9 +1984,9 @@
 
     const newSession = {
       id: date,
-      date, reportTitle: g('f-reporttitle')||'', sport: g('f-sport')||'—',
+      date, reportTitle: g('f-reporttitle')||'', sport: g('f-sport')||'\u2014',
       athletes: Number(g('f-athletes'))|| roster.length,
-      start:'—', end:'—', duration: durationStr||'—', type: g('f-type')||'Training',
+      start:'\u2014', end:'\u2014', duration: durationStr||'\u2014', type: g('f-type')||'Training',
       isGame: document.getElementById('f-isgame').checked,
       isTaper: document.getElementById('f-istaper').checked,
       team:{ trimp:Number(g('f-trimp'))||0, ate:Number(g('f-ate'))||0, ante:Number(g('f-ante'))||0 },
