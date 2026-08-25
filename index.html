@@ -94,6 +94,10 @@
   .alert-name{font-weight:600;}
   .alert-delta{font-family:'JetBrains Mono',monospace;color:var(--text-dim);}
   .alert-delta b{color:var(--z5);}
+  .pr-chip{display:flex;align-items:center;gap:8px;background:rgba(168,153,104,0.08);border:1px solid rgba(168,153,104,0.4);
+    border-radius:8px;padding:7px 12px;font-size:12.5px;}
+  .pr-chip .alert-delta b{color:var(--gold-text);}
+  .pr-dot{color:var(--gold-text);font-size:13px;line-height:1;flex:none;}
 
   /* section */
   .section{margin-bottom:24px;}
@@ -239,6 +243,11 @@
   .jumpoverview-val{font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:var(--text);margin-top:4px;}
   .jumpoverview-delta{font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:2px;}
   .status-up{color:var(--z1);} .status-down{color:var(--z5);} .status-flat{color:var(--text-dimmer);}
+  .status-badge{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:5px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
+  .status-above{background:#C6EFCE;color:#006100;}
+  .status-at{background:#BDD7EE;color:#1F4E79;}
+  .status-below{background:#FFC7CE;color:#9C0006;}
+  .team-pr-flag{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:5px;background:#FFD966;color:#7F6000;white-space:nowrap;margin-left:6px;display:inline-block;}
 </style>
 
 <div class="wrap">
@@ -353,7 +362,7 @@
         {name:'Sophie Abbott',trimp:211,ate:3.9,ante:3.0,epoc:108,moveload:253},
         {name:'Ruari Dever',trimp:213,ate:4.0,ante:3.2,epoc:123,moveload:249},
         {name:'Valentina Barrera',trimp:225,ate:4.2,ante:4.0,epoc:129,moveload:254},
-        {name:'Alicia Rierbich',trimp:231,ate:4.1,ante:3.3,epoc:120,moveload:315},
+        {name:'Alicia Riebech',trimp:231,ate:4.1,ante:3.3,epoc:120,moveload:315},
         {name:'Sidney Nicholas',trimp:232,ate:4.4,ante:3.5,epoc:140,moveload:290},
         {name:'Olivia Cruz',trimp:250,ate:4.2,ante:3.3,epoc:117,moveload:314},
         {name:'Ryleigh Alcala',trimp:254,ate:4.4,ante:3.7,epoc:121,moveload:245},
@@ -379,7 +388,7 @@
         {name:'Sophie Abbott',trimp:96,ate:2.6,ante:2.5,epoc:42,moveload:162},
         {name:'Sophia Auzenne',trimp:105,ate:2.8,ante:2.1,epoc:46,moveload:166},
         {name:'Kyleigh Bathe',trimp:105,ate:3.2,ante:2.2,epoc:60,moveload:165},
-        {name:'Alicia Rierbich',trimp:112,ate:2.8,ante:2.3,epoc:52,moveload:209},
+        {name:'Alicia Riebech',trimp:112,ate:2.8,ante:2.3,epoc:52,moveload:209},
         {name:'Sidney Nicholas',trimp:116,ate:3.1,ante:3.1,epoc:69,moveload:201},
         {name:'True Benshoff',trimp:125,ate:2.9,ante:2.1,epoc:50,moveload:197},
         {name:'Valentina Barrera',trimp:132,ate:3.2,ante:3.3,epoc:57,moveload:202},
@@ -401,7 +410,7 @@
       positions:[{pos:'CB',trimp:194,ate:3.7,ante:2.8},{pos:'AM',trimp:182,ate:3.6,ante:3.0},{pos:'CF',trimp:226,ate:3.8,ante:2.7},{pos:'DM',trimp:229,ate:4.0,ante:4.0}],
       alerts:[],
       roster:[
-        {name:'Alicia Rierbich',trimp:145,ate:3.0,ante:2.6,epoc:52,moveload:313},
+        {name:'Alicia Riebech',trimp:145,ate:3.0,ante:2.6,epoc:52,moveload:313},
         {name:'Sophia Auzenne',trimp:162,ate:3.5,ante:3.0,epoc:94,moveload:246},
         {name:'Carly Stinson',trimp:169,ate:3.2,ante:2.5,epoc:89,moveload:333},
         {name:'Ava Gzym',trimp:171,ate:3.8,ante:3.1,epoc:90,moveload:157},
@@ -435,7 +444,7 @@
         {name:'Sidney Nicholas',trimp:124,ate:3.0,ante:3.0,epoc:57,moveload:244},
         {name:'Sophie Abbott',trimp:125,ate:3.1,ante:3.0,epoc:62,moveload:211},
         {name:'Kyleigh Bathe',trimp:129,ate:3.2,ante:1.3,epoc:58,moveload:209},
-        {name:'Alicia Rierbich',trimp:131,ate:3.1,ante:2.6,epoc:70,moveload:265},
+        {name:'Alicia Riebech',trimp:131,ate:3.1,ante:2.6,epoc:70,moveload:265},
         {name:'Carly Stinson',trimp:143,ate:3.1,ante:2.8,epoc:68,moveload:275},
         {name:'Ruari Dever',trimp:148,ate:3.3,ante:3.1,epoc:72,moveload:263},
         {name:'Emilee Tonkovich',trimp:151,ate:3.1,ante:2.7,epoc:59,moveload:204},
@@ -461,7 +470,7 @@
       alerts:[],
       roster:[
         {name:'Sophie Abbott',trimp:88,ate:2.5,ante:2.3,epoc:38,moveload:152},
-        {name:'Alicia Rierbich',trimp:92,ate:2.5,ante:2.0,epoc:40,moveload:197},
+        {name:'Alicia Riebech',trimp:92,ate:2.5,ante:2.0,epoc:40,moveload:197},
         {name:'Valentina Barrera',trimp:113,ate:3.1,ante:3.0,epoc:51,moveload:211},
         {name:'Sophia Auzenne',trimp:115,ate:3.2,ante:2.2,epoc:69,moveload:158},
         {name:'Kyleigh Bathe',trimp:117,ate:3.2,ante:1.5,epoc:60,moveload:191},
@@ -491,7 +500,7 @@
       alerts:[],
       roster:[
         {name:'Kyleigh Bathe',trimp:111,ate:3.1,ante:1.5,epoc:79,trimp7day:839,moveload:208},
-        {name:'Alicia Rierbich',trimp:121,ate:3.1,ante:2.4,epoc:79,trimp7day:849,moveload:237},
+        {name:'Alicia Riebech',trimp:121,ate:3.1,ante:2.4,epoc:79,trimp7day:849,moveload:237},
         {name:'Ava Gzym',trimp:128,ate:3.3,ante:2.5,epoc:80,trimp7day:926,moveload:169},
         {name:'Sidney Nicholas',trimp:131,ate:3.5,ante:3.5,epoc:119,trimp7day:955,moveload:241},
         {name:'Carly Stinson',trimp:133,ate:3.2,ante:2.5,epoc:84,trimp7day:888,moveload:251},
@@ -522,7 +531,7 @@
       roster:[
         {name:'Kyleigh Bathe',trimp:83,ate:2.4,ante:0.8,epoc:34,moveload:180},
         {name:'Valentina Barrera',trimp:96,ate:2.6,ante:2.9,epoc:41,moveload:182},
-        {name:'Alicia Rierbich',trimp:96,ate:2.4,ante:2.2,epoc:37,moveload:220},
+        {name:'Alicia Riebech',trimp:96,ate:2.4,ante:2.2,epoc:37,moveload:220},
         {name:'Ava Gzym',trimp:98,ate:2.7,ante:2.4,epoc:43,moveload:141},
         {name:'Carly Stinson',trimp:104,ate:2.5,ante:2.0,epoc:40,moveload:216},
         {name:'Ruari Dever',trimp:121,ate:3.0,ante:2.5,epoc:57,moveload:235},
@@ -552,7 +561,7 @@
       roster:[
         {name:'Cortlyn Hefty',trimp:113,ate:2.2,ante:1.6,epoc:30,moveload:225},
         {name:'Sophie Abbott',trimp:119,ate:3.1,ante:2.6,epoc:73,moveload:209},
-        {name:'Alicia Rierbich',trimp:129,ate:3.0,ante:2.6,epoc:62,moveload:252},
+        {name:'Alicia Riebech',trimp:129,ate:3.0,ante:2.6,epoc:62,moveload:252},
         {name:'Kyleigh Bathe',trimp:135,ate:3.3,ante:2.2,epoc:59,moveload:242},
         {name:'True Benshoff',trimp:156,ate:3.1,ante:2.6,epoc:56,moveload:266},
         {name:'Lauryn Hancock',trimp:158,ate:3.4,ante:3.3,epoc:74,moveload:283},
@@ -584,7 +593,7 @@
         {name:'True Benshoff',trimp:76,ate:1.6,ante:0.0,epoc:15,moveload:163},
         {name:'Valentina Barrera',trimp:79,ate:2.2,ante:2.9,epoc:31,moveload:169},
         {name:'Olivia Cruz',trimp:83,ate:2.2,ante:1.7,epoc:32,moveload:211},
-        {name:'Alicia Rierbich',trimp:86,ate:2.2,ante:1.6,epoc:31,moveload:218},
+        {name:'Alicia Riebech',trimp:86,ate:2.2,ante:1.6,epoc:31,moveload:218},
         {name:'Carly Stinson',trimp:90,ate:2.3,ante:1.3,epoc:38,moveload:213},
         {name:'Madi Wright',trimp:91,ate:2.1,ante:0.6,epoc:26,moveload:124},
         {name:'Kyleigh Bathe',trimp:93,ate:2.6,ante:0.9,epoc:51,moveload:204},
@@ -615,7 +624,7 @@
         {name:'Lauryn Hancock',trimp:97,ate:2.8,ante:2.0,epoc:45,moveload:183},
         {name:'Carly Stinson',trimp:100,ate:2.5,ante:1.6,epoc:41,moveload:189},
         {name:'Sidney Nicholas',trimp:100,ate:3.0,ante:2.1,epoc:53,moveload:191},
-        {name:'Alicia Rierbich',trimp:102,ate:2.7,ante:2.2,epoc:51,moveload:214},
+        {name:'Alicia Riebech',trimp:102,ate:2.7,ante:2.2,epoc:51,moveload:214},
         {name:'True Benshoff',trimp:105,ate:2.7,ante:2.0,epoc:45,moveload:195},
         {name:'Valentina Barrera',trimp:106,ate:3.0,ante:3.0,epoc:55,moveload:176},
         {name:'Emilee Tonkovich',trimp:111,ate:2.8,ante:2.0,epoc:40,moveload:168},
@@ -650,7 +659,7 @@
         {name:'Ruari Dever',trimp:133,ate:3.3,ante:2.5,epoc:77,moveload:243},
         {name:'Cortlyn Hefty',trimp:140,ate:2.7,ante:2.1,epoc:37,moveload:182},
         {name:'Shanti Atkins',trimp:140,ate:3.4,ante:2.7,epoc:84,moveload:177},
-        {name:'Alicia Rierbich',trimp:142,ate:3.3,ante:2.9,epoc:60,moveload:260},
+        {name:'Alicia Riebech',trimp:142,ate:3.3,ante:2.9,epoc:60,moveload:260},
         {name:'Ryleigh Alcala',trimp:146,ate:3.3,ante:3.0,epoc:73,moveload:173},
         {name:'Nikki Miskovic',trimp:147,ate:3.4,ante:2.8,epoc:69,moveload:190},
         {name:'Emilee Tonkovich',trimp:147,ate:3.3,ante:2.6,epoc:72,moveload:183},
@@ -674,7 +683,7 @@
         {name:'Madi Wright',trimp:85,ate:3.1,ante:1.6,epoc:76,moveload:113},
         {name:'Kyleigh Bathe',trimp:88,ate:3.0,ante:0.6,epoc:62,moveload:201},
         {name:'Sophie Abbott',trimp:107,ate:3.2,ante:2.4,epoc:73,moveload:199},
-        {name:'Alicia Rierbich',trimp:108,ate:3.3,ante:2.4,epoc:86,moveload:204},
+        {name:'Alicia Riebech',trimp:108,ate:3.3,ante:2.4,epoc:86,moveload:204},
         {name:'True Benshoff',trimp:109,ate:3.0,ante:2.0,epoc:60,moveload:194},
         {name:'Emilee Tonkovich',trimp:127,ate:3.4,ante:2.1,epoc:86,moveload:197},
         {name:'Ava Gzym',trimp:129,ate:3.7,ante:2.8,epoc:132,moveload:182},
@@ -716,7 +725,7 @@
         {name:'Madi Wright',trimp:131,ate:3.1,ante:2.2,epoc:52,moveload:165},
         {name:'Sophia Auzenne',trimp:133,ate:3.2,ante:2.1,epoc:61,moveload:193},
         {name:'Ryleigh Alcala',trimp:137,ate:3.2,ante:3.2,epoc:65,moveload:195},
-        {name:'Alicia Rierbich',trimp:141,ate:3.3,ante:3.0,epoc:73,moveload:271},
+        {name:'Alicia Riebech',trimp:141,ate:3.3,ante:3.0,epoc:73,moveload:271},
         {name:'Olivia Cruz',trimp:146,ate:3.2,ante:3.1,epoc:75,moveload:266},
         {name:'Elise Boyd',trimp:164,ate:3.2,ante:2.2,epoc:71,moveload:258},
         {name:'Olivia Lewis',trimp:167,ate:3.7,ante:3.2,epoc:93,moveload:379},
@@ -734,7 +743,7 @@
         {name:'Kyleigh Bathe',trimp:43,ate:1.3,ante:0.3},
         {name:'Sophie Abbott',trimp:55,ate:2.1,ante:2.1},
         {name:'Valentina Barrera',trimp:62,ate:2.1,ante:2.3},
-        {name:'Alicia Rierbich',trimp:71,ate:2.2,ante:2.1},
+        {name:'Alicia Riebech',trimp:71,ate:2.2,ante:2.1},
         {name:'Emilee Tonkovich',trimp:74,ate:2.1,ante:1.0},
         {name:'True Benshoff',trimp:76,ate:2.0,ante:1.2},
         {name:'Ryleigh Alcala',trimp:81,ate:2.2,ante:1.7},
@@ -768,7 +777,7 @@
         {name:'True Benshoff',trimp:177,ate:3.5,ante:2.1,epoc:108,moveload:218},
         {name:'Madi Wright',trimp:194,ate:4.1,ante:2.5,epoc:163,moveload:160},
         {name:'Cortlyn Hefty',trimp:196,ate:3.5,ante:2.0,epoc:94,moveload:218},
-        {name:'Alicia Rierbich',trimp:198,ate:4.3,ante:3.0,epoc:163,moveload:306},
+        {name:'Alicia Riebech',trimp:198,ate:4.3,ante:3.0,epoc:163,moveload:306},
         {name:'Olivia Lewis',trimp:207,ate:4.5,ante:4.0,epoc:183,moveload:263},
         {name:'Ruari Dever',trimp:211,ate:4.7,ante:2.3,epoc:198,moveload:241},
         {name:'Sophia Auzenne',trimp:231,ate:4.7,ante:2.8,epoc:216,moveload:237},
@@ -799,7 +808,7 @@
         {name:'Sidney Nicholas',trimp:135,ate:3.2,ante:2.8},
         {name:'Shanti Atkins',trimp:143,ate:3.2,ante:3.0},
         {name:'Emilee Tonkovich',trimp:143,ate:3.1,ante:2.6},
-        {name:'Alicia Rierbich',trimp:144,ate:3.1,ante:2.4},
+        {name:'Alicia Riebech',trimp:144,ate:3.1,ante:2.4},
         {name:'Valentina Barrera',trimp:146,ate:3.2,ante:3.6},
         {name:'Ava Gzym',trimp:163,ate:3.5,ante:3.3},
         {name:'Ryleigh Alcala',trimp:176,ate:3.5,ante:3.4},
@@ -817,7 +826,7 @@
       positions:[{pos:'CB',trimp:110,ate:3.0,ante:2.3},{pos:'W',trimp:139,ate:3.2,ante:2.8},{pos:'AM',trimp:124,ate:3.2,ante:2.6},{pos:'CF',trimp:147,ate:3.5,ante:3.3},{pos:'DM',trimp:139,ate:3.2,ante:2.7},{pos:'OB',trimp:137,ate:3.3,ante:2.3}],
       alerts:[],
       roster:[
-        {name:'Alicia Rierbich',trimp:102,ate:2.8,ante:2.4},
+        {name:'Alicia Riebech',trimp:102,ate:2.8,ante:2.4},
         {name:'Carly Stinson',trimp:105,ate:2.9,ante:2.2},
         {name:'Sidney Nicholas',trimp:110,ate:3.0,ante:2.7},
         {name:'Nikki Miskovic',trimp:112,ate:3.0,ante:2.5},
@@ -848,7 +857,7 @@
         {name:'Sidney Nicholas',trimp:74,ate:2.4,ante:2.8},
         {name:'Carly Stinson',trimp:75,ate:2.2,ante:1.0},
         {name:'True Benshoff',trimp:84,ate:2.1,ante:1.2},
-        {name:'Alicia Rierbich',trimp:87,ate:2.5,ante:2.1},
+        {name:'Alicia Riebech',trimp:87,ate:2.5,ante:2.1},
         {name:'Sophie Abbott',trimp:89,ate:2.6,ante:2.3},
         {name:'Valentina Barrera',trimp:95,ate:2.9,ante:3.1},
         {name:'Kyleigh Bathe',trimp:95,ate:2.7,ante:1.6},
@@ -872,7 +881,7 @@
       positions:[{pos:'CB',trimp:14,ate:0.5,ante:0.2},{pos:'W',trimp:26,ate:1.0,ante:0.5},{pos:'AM',trimp:20,ate:1.1,ante:0.5},{pos:'CF',trimp:43,ate:1.6,ante:0.9},{pos:'DM',trimp:34,ate:1.5,ante:0.8}],
       alerts:[],
       roster:[
-        {name:'Alicia Rierbich',trimp:13,ate:1.3,ante:1.4},
+        {name:'Alicia Riebech',trimp:13,ate:1.3,ante:1.4},
         {name:'Valentina Barrera',trimp:13,ate:0.7,ante:0.2},
         {name:'Carly Stinson',trimp:14,ate:0.4,ante:0.0},
         {name:'Kyleigh Bathe',trimp:14,ate:0.5,ante:0.0},
@@ -910,7 +919,7 @@
         {name:'Valentina Barrera',trimp:94,ate:2.5,ante:2.5},
         {name:'Emilee Tonkovich',trimp:95,ate:2.2,ante:1.3},
         {name:'Olivia Lewis',trimp:99,ate:2.2,ante:2.2},
-        {name:'Alicia Rierbich',trimp:101,ate:2.6,ante:2.3},
+        {name:'Alicia Riebech',trimp:101,ate:2.6,ante:2.3},
         {name:'Sidney Nicholas',trimp:110,ate:3.0,ante:3.5},
         {name:'Madi Wright',trimp:116,ate:2.8,ante:2.0},
         {name:'Shanti Atkins',trimp:120,ate:3.1,ante:2.5},
@@ -939,7 +948,7 @@
         {name:'Emilee Tonkovich',trimp:82,ate:2.2,ante:2.0},
         {name:'Ava Gzym',trimp:83,ate:2.7,ante:2.0},
         {name:'Olivia Lewis',trimp:85,ate:2.3,ante:2.1},
-        {name:'Alicia Rierbich',trimp:85,ate:2.4,ante:1.7},
+        {name:'Alicia Riebech',trimp:85,ate:2.4,ante:1.7},
         {name:'Valentina Barrera',trimp:86,ate:2.5,ante:2.5},
         {name:'Nikki Miskovic',trimp:88,ate:2.5,ante:2.1},
         {name:'Olivia Cruz',trimp:91,ate:2.4,ante:2.1},
@@ -962,7 +971,7 @@
         {name:'Lauryn Hancock',trimp:66,ate:2.5,ante:2.2},
         {name:'Sophie Abbott',trimp:103,ate:2.9,ante:2.5},
         {name:'Nikki Miskovic',trimp:108,ate:2.8,ante:2.6},
-        {name:'Alicia Rierbich',trimp:110,ate:2.8,ante:2.4},
+        {name:'Alicia Riebech',trimp:110,ate:2.8,ante:2.4},
         {name:'Carly Stinson',trimp:111,ate:2.7,ante:2.0},
         {name:'Kyleigh Bathe',trimp:117,ate:3.0,ante:0.5},
         {name:'True Benshoff',trimp:132,ate:2.9,ante:2.3},
@@ -994,7 +1003,7 @@
         {name:'Kyleigh Bathe',trimp:55,ate:2.0,ante:0.1},
         {name:'Ava Gzym',trimp:61,ate:2.7,ante:1.5},
         {name:'Carly Stinson',trimp:62,ate:2.1,ante:0.6},
-        {name:'Alicia Rierbich',trimp:62,ate:2.1,ante:1.2},
+        {name:'Alicia Riebech',trimp:62,ate:2.1,ante:1.2},
         {name:'Cortlyn Hefty',trimp:64,ate:2.2,ante:0.5},
         {name:'Sidney Nicholas',trimp:68,ate:2.5,ante:2.0},
         {name:'Ruari Dever',trimp:70,ate:2.5,ante:2.0},
@@ -1019,7 +1028,7 @@
       roster:[
         {name:'Ruari Dever',trimp:63,ate:2.1,ante:1.7},
         {name:'Sophie Abbott',trimp:69,ate:2.0,ante:2.3},
-        {name:'Alicia Rierbich',trimp:74,ate:2.1,ante:2.9},
+        {name:'Alicia Riebech',trimp:74,ate:2.1,ante:2.9},
         {name:'Carly Stinson',trimp:75,ate:2.0,ante:1.4},
         {name:'Kyleigh Bathe',trimp:79,ate:2.4,ante:1.3},
         {name:'True Benshoff',trimp:85,ate:2.2,ante:2.1},
@@ -1055,7 +1064,7 @@
         {name:'Valentina Barrera',trimp:201,ate:5.0,ante:3.2},
         {name:'Cortlyn Hefty',trimp:208,ate:3.8,ante:2.7},
         {name:'Emilee Tonkovich',trimp:211,ate:4.1,ante:3.0},
-        {name:'Alicia Rierbich',trimp:214,ate:4.5,ante:3.2},
+        {name:'Alicia Riebech',trimp:214,ate:4.5,ante:3.2},
         {name:'Shanti Atkins',trimp:216,ate:4.4,ante:2.5},
         {name:'True Benshoff',trimp:224,ate:4.5,ante:2.7},
         {name:'Sidney Nicholas',trimp:258,ate:5.0,ante:4.0},
@@ -1078,7 +1087,7 @@
         {name:'Kyleigh Bathe',trimp:70,ate:2.6,ante:0.6},
         {name:'True Benshoff',trimp:79,ate:2.1,ante:0.4},
         {name:'Sidney Nicholas',trimp:86,ate:2.5,ante:2.3},
-        {name:'Alicia Rierbich',trimp:88,ate:2.2,ante:2.0},
+        {name:'Alicia Riebech',trimp:88,ate:2.2,ante:2.0},
         {name:'Elise Boyd',trimp:93,ate:2.2,ante:0.5},
         {name:'Shanti Atkins',trimp:104,ate:2.8,ante:2.1},
         {name:'Emilee Tonkovich',trimp:105,ate:2.6,ante:0.8},
@@ -1107,7 +1116,7 @@
         {name:'Sophie Abbott',trimp:197,ate:4.0,ante:2.9},
         {name:'Shanti Atkins',trimp:221,ate:4.3,ante:2.5},
         {name:'Ruari Dever',trimp:223,ate:4.6,ante:3.6},
-        {name:'Alicia Rierbich',trimp:225,ate:4.4,ante:2.8},
+        {name:'Alicia Riebech',trimp:225,ate:4.4,ante:2.8},
         {name:'Valentina Barrera',trimp:226,ate:4.7,ante:3.0},
         {name:'True Benshoff',trimp:235,ate:4.2,ante:2.7},
         {name:'Emilee Tonkovich',trimp:258,ate:4.7,ante:2.7},
@@ -1139,7 +1148,7 @@
         {name:'Carly Stinson',trimp:95,ate:2.5,ante:2.1},
         {name:'Emilee Tonkovich',trimp:96,ate:2.4,ante:1.7},
         {name:'Sidney Nicholas',trimp:98,ate:2.9,ante:3.0},
-        {name:'Alicia Rierbich',trimp:98,ate:2.8,ante:2.6},
+        {name:'Alicia Riebech',trimp:98,ate:2.8,ante:2.6},
         {name:'Ruari Dever',trimp:99,ate:2.8,ante:2.4},
         {name:'Ryleigh Alcala',trimp:99,ate:2.6,ante:3.0},
         {name:'Elise Boyd',trimp:105,ate:2.2,ante:1.5},
@@ -1172,7 +1181,7 @@
         {name:'Nikki Miskovic',trimp:265,ate:5.0,ante:3.6},
         {name:'Elise Boyd',trimp:274,ate:4.9,ante:2.1},
         {name:'Olivia Lewis',trimp:277,ate:5.0,ante:4.0},
-        {name:'Alicia Rierbich',trimp:295,ate:5.0,ante:3.7},
+        {name:'Alicia Riebech',trimp:295,ate:5.0,ante:3.7},
       ]
     },
     {
@@ -1191,7 +1200,7 @@
         {name:'Carly Stinson',trimp:41,ate:1.5,ante:0.0},
         {name:'Kyleigh Bathe',trimp:47,ate:2.3,ante:1.4},
         {name:'Sophie Abbott',trimp:48,ate:1.7,ante:1.0},
-        {name:'Alicia Rierbich',trimp:51,ate:1.7,ante:0.6},
+        {name:'Alicia Riebech',trimp:51,ate:1.7,ante:0.6},
         {name:'Ryleigh Alcala',trimp:52,ate:1.6,ante:0.6},
         {name:'Valentina Barrera',trimp:52,ate:1.9,ante:1.1},
         {name:'Ava Gzym',trimp:60,ate:2.1,ante:1.2},
@@ -1219,7 +1228,7 @@
         {name:'True Benshoff',trimp:104,ate:2.2,ante:2.0},
         {name:'Olivia Lewis',trimp:111,ate:2.9,ante:2.1},
         {name:'Emilee Tonkovich',trimp:117,ate:2.7,ante:2.0},
-        {name:'Alicia Rierbich',trimp:119,ate:2.7,ante:2.0},
+        {name:'Alicia Riebech',trimp:119,ate:2.7,ante:2.0},
         {name:'Valentina Barrera',trimp:122,ate:3.0,ante:2.7},
         {name:'Shanti Atkins',trimp:127,ate:2.9,ante:2.4},
         {name:'Nikki Miskovic',trimp:130,ate:3.0,ante:2.9},
@@ -1253,16 +1262,41 @@
         {name:'Ryleigh Alcala',trimp:260,ate:4.8,ante:4.2},
         {name:'Elise Boyd',trimp:281,ate:4.9,ante:2.6},
         {name:'Nikki Miskovic',trimp:282,ate:5.0,ante:3.8},
-        {name:'Alicia Rierbich',trimp:282,ate:5.0,ante:3.5},
+        {name:'Alicia Riebech',trimp:282,ate:5.0,ante:3.5},
         {name:'Sidney Nicholas',trimp:291,ate:5.0,ante:4.4},
         {name:'Olivia Cruz',trimp:297,ate:5.0,ante:2.6},
+      ]
+    },
+    {
+      id:'2026-08-25', date:'2026-08-25', reportTitle:'25 August 26', sport:'Football', athletes:16,
+      start:'8:39:11 AM', end:'9:53:50 AM', duration:'01:14:39', type:'Training',
+      team:{trimp:91, ate:2.9, ante:2.3},
+      zones:[{z:'Z5',seconds:144,pct:3},{z:'Z4',seconds:812,pct:18},{z:'Z3',seconds:953,pct:21},{z:'Z2',seconds:881,pct:20},{z:'Z1',seconds:982,pct:22}],
+      positions:[{pos:'CB',trimp:85,ate:2.8,ante:1.8},{pos:'W',trimp:88,ate:2.8,ante:2.4},{pos:'AM',trimp:87,ate:3.0,ante:2.5},{pos:'CF',trimp:101,ate:3.1,ante:2.5},{pos:'OB',trimp:93,ate:3.0,ante:2.6}],
+      alerts:[{name:'Sophie Abbott',note:'Awaiting measurement - sensor data not uploaded'}],
+      roster:[
+        {name:'Lauryn Hancock',trimp:48,ate:2.3,ante:1.9},
+        {name:'Valentina Barrera',trimp:66,ate:2.5,ante:2.6},
+        {name:'Shanti Atkins',trimp:68,ate:2.6,ante:2.1},
+        {name:'Carly Stinson',trimp:74,ate:2.4,ante:1.5},
+        {name:'True Benshoff',trimp:75,ate:2.1,ante:1.8},
+        {name:'Olivia Lewis',trimp:85,ate:3.0,ante:2.5},
+        {name:'Sidney Nicholas',trimp:86,ate:3.1,ante:3.0},
+        {name:'Kyleigh Bathe',trimp:87,ate:3.0,ante:1.2},
+        {name:'Ava Gzym',trimp:88,ate:3.0,ante:2.4},
+        {name:'Nikki Miskovic',trimp:95,ate:3.1,ante:2.8},
+        {name:'Ryleigh Alcala',trimp:96,ate:3.0,ante:2.6},
+        {name:'Cortlyn Hefty',trimp:101,ate:2.8,ante:2.1},
+        {name:'Elise Boyd',trimp:118,ate:3.3,ante:2.0},
+        {name:'Madi Wright',trimp:133,ate:3.9,ante:3.0},
+        {name:'Ruari Dever',trimp:137,ate:3.8,ante:3.3},
       ]
     }
   ];
 
   const jumpSessions = [
     { id:'2026-07-24', date:'2026-07-24', label:'Test 1', phase:'preseason', roster:[
-      {name:'Alicia Rierbich', j1:14.8, j2:14.6, j3:14.3, best:14.8},
+      {name:'Alicia Riebech', j1:14.8, j2:14.6, j3:14.3, best:14.8},
       {name:'Ava Gzym', j1:13.6, j2:13, j3:13.1, best:13.6},
       {name:'Carly Stinson', j1:13.6, j2:14.2, j3:14.6, best:14.6},
       {name:'Cortlyn Hefty', j1:16.5, j2:16.8, j3:16.4, best:16.8},
@@ -1286,7 +1320,7 @@
       {name:'Valentina Barrera', j1:14.7, j2:16.4, j3:16.2, best:16.4},
     ]},
     { id:'2026-07-27', date:'2026-07-27', label:'Test 2', phase:'preseason', roster:[
-      {name:'Alicia Rierbich', j1:14.8, j2:13.7, j3:15.4, best:15.4},
+      {name:'Alicia Riebech', j1:14.8, j2:13.7, j3:15.4, best:15.4},
       {name:'Ava Gzym', j1:12, j2:13.2, j3:12.9, best:13.2},
       {name:'Carly Stinson', j1:15.1, j2:14.3, j3:13.3, best:15.1},
       {name:'Cortlyn Hefty', j1:17.7, j2:17.4, j3:16.2, best:17.7},
@@ -1310,7 +1344,7 @@
       {name:'Valentina Barrera', j1:15.2, j2:16.4, j3:15.4, best:16.4},
     ]},
     { id:'2026-07-30', date:'2026-07-30', label:'Test 3', phase:'preseason', roster:[
-      {name:'Alicia Rierbich', j1:16.1, j2:14.8, j3:15.4, best:16.1},
+      {name:'Alicia Riebech', j1:16.1, j2:14.8, j3:15.4, best:16.1},
       {name:'Ava Gzym', j1:14.9, j2:14.5, j3:14.8, best:14.9},
       {name:'Carly Stinson', j1:13.6, j2:14.6, j3:13.4, best:14.6},
       {name:'Cortlyn Hefty', j1:17.7, j2:16.9, j3:16.6, best:17.7},
@@ -1335,7 +1369,7 @@
       {name:'Valentina Barrera', j1:15.4, j2:15.3, j3:15.4, best:15.4},
     ]},
     { id:'2026-08-03', date:'2026-08-03', label:'Test 4', phase:'preseason', roster:[
-      {name:'Alicia Rierbich', j1:15.1, j2:14.8, j3:16.8, best:16.8},
+      {name:'Alicia Riebech', j1:15.1, j2:14.8, j3:16.8, best:16.8},
       {name:'Ava Gzym', j1:13.8, j2:14, j3:13.1, best:14},
       {name:'Carly Stinson', j1:13.4, j2:13, j3:12.8, best:13.4},
       {name:'Cortlyn Hefty', j1:17.7, j2:17.2, j3:15.7, best:17.7},
@@ -1360,7 +1394,7 @@
       {name:'Valentina Barrera', j1:15.9, j2:15.8, j3:16, best:16},
     ]},
     { id:'2026-08-07', date:'2026-08-07', label:'Test 5', phase:'preseason', roster:[
-      {name:'Alicia Rierbich', j1:14.9, j2:15.1, j3:15.8, best:15.8},
+      {name:'Alicia Riebech', j1:14.9, j2:15.1, j3:15.8, best:15.8},
       {name:'Ava Gzym', j1:13.7, j2:13.9, j3:13.3, best:13.9},
       {name:'Carly Stinson', j1:13.3, j2:14.2, j3:13.5, best:14.2},
       {name:'Elise Boyd', j1:19.1, j2:19.5, j3:19.3, best:19.5},
@@ -1381,7 +1415,7 @@
       {name:'Valentina Barrera', j1:14, j2:14.8, j3:15.4, best:15.4},
     ]},
     { id:'2026-08-11', date:'2026-08-11', label:'Test 6', phase:'preseason', roster:[
-        {name:'Alicia Rierbich', j1:15.7, j2:16.4, j3:16.6, best:16.6},
+        {name:'Alicia Riebech', j1:15.7, j2:16.4, j3:16.6, best:16.6},
         {name:'Ava Gzym', j1:14.5, j2:13.2, j3:14.4, best:14.5},
         {name:'Carly Stinson', j1:15.9, j2:14.9, j3:13.9, best:15.9},
         {name:'Elise Boyd', j1:19.2, j2:18.7, j3:null, best:19.2},
@@ -1403,6 +1437,50 @@
         {name:'True Benshoff', j1:17.1, j2:16.6, j3:18.2, best:18.2},
         {name:'Valentina Barrera', j1:14.1, j2:14.3, j3:14, best:14.3},
     ]},
+    { id:'2026-08-18', date:'2026-08-18', label:'Week 1', phase:'inseason', roster:[
+        {name:'Alicia Riebech', j1:15.2, j2:16, j3:17, best:17},
+        {name:'Ava Gzym', j1:14.3, j2:12.5, j3:13.9, best:14.3},
+        {name:'Carly Stinson', j1:13.6, j2:14.3, j3:12.8, best:14.3},
+        {name:'Cortlyn Hefty', j1:15.9, j2:15.7, j3:15.4, best:15.9},
+        {name:'Elise Boyd', j1:17.8, j2:17.7, j3:16.8, best:17.8},
+        {name:'Emilee Tonkovich', j1:15, j2:15.6, j3:15.8, best:15.8},
+        {name:'Hayleigh Lewis', j1:17.7, j2:18.3, j3:19.1, best:19.1},
+        {name:'Kyleigh Bathe', j1:16.2, j2:15.7, j3:15.2, best:16.2},
+        {name:'Madi Wright', j1:15.3, j2:15.9, j3:16.6, best:16.6},
+        {name:'Nikki Miskovic', j1:16.5, j2:16.4, j3:15.7, best:16.5},
+        {name:'Olivia Lewis', j1:11.9, j2:13, j3:12.2, best:13},
+        {name:'Ruari Dever', j1:12.5, j2:11.8, j3:12.6, best:12.6},
+        {name:'Ryleigh Alcala', j1:19.1, j2:19, j3:19.1, best:19.1},
+        {name:'Shanti Atkins', j1:14.3, j2:15.2, j3:14.8, best:15.2},
+        {name:'Sidney Nicholas', j1:14.5, j2:14.9, j3:15.5, best:15.5},
+        {name:'Sophie Abbott', j1:14.7, j2:15.2, j3:15, best:15.2},
+        {name:'Summer Swords', j1:13.4, j2:13.8, j3:13.4, best:13.8},
+        {name:'Tea Optiz', j1:17.3, j2:16.3, j3:16.2, best:17.3},
+        {name:'True Benshoff', j1:17.3, j2:17.8, j3:17.1, best:17.8},
+        {name:'Valentina Barrera', j1:13.4, j2:14.4, j3:13.4, best:14.4},
+    ]},
+    { id:'2026-08-25', date:'2026-08-25', label:'Week 2', phase:'inseason', roster:[
+        {name:'Alicia Riebech', j1:14.9, j2:14.8, j3:14, best:14.9},
+        {name:'Ava Gzym', j1:13.8, j2:12.7, j3:14, best:14},
+        {name:'Carly Stinson', j1:14.7, j2:14.2, j3:13.4, best:14.7},
+        {name:'Cortlyn Hefty', j1:15.6, j2:15.6, j3:15.1, best:15.6},
+        {name:'Elise Boyd', j1:18.1, j2:16.6, j3:16, best:18.1},
+        {name:'Emilee Tonkovich', j1:17.4, j2:15.8, j3:17, best:17.4},
+        {name:'Hayleigh Lewis', j1:18.5, j2:20, j3:20.4, best:20.4},
+        {name:'Kyleigh Bathe', j1:16.5, j2:15.9, j3:15.2, best:16.5},
+        {name:'Lauryn Hancock', j1:17.7, j2:16.6, j3:17.3, best:17.7},
+        {name:'Madi Wright', j1:14.4, j2:14.7, j3:13.3, best:14.7},
+        {name:'Nikki Miskovic', j1:17.1, j2:16.6, j3:16, best:17.1},
+        {name:'Olivia Lewis', j1:14.1, j2:13.3, j3:15.4, best:15.4},
+        {name:'Ruari Dever', j1:13.6, j2:13.2, j3:12.5, best:13.6},
+        {name:'Ryleigh Alcala', j1:21.2, j2:21.7, j3:21.8, best:21.8},
+        {name:'Sidney Nicholas', j1:17.1, j2:17.3, j3:18.1, best:18.1},
+        {name:'Sophie Abbott', j1:15.9, j2:16.3, j3:16.1, best:16.3},
+        {name:'Summer Swords', j1:14.9, j2:14.3, j3:14, best:14.9},
+        {name:'Tea Optiz', j1:16.9, j2:17, j3:15.7, best:17},
+        {name:'True Benshoff', j1:18, j2:17.2, j3:18.5, best:18.5},
+        {name:'Valentina Barrera', j1:14.4, j2:15, j3:14.1, best:15},
+    ]},
   ];
 
   function yoyoToVO2max(shuttles){
@@ -1418,7 +1496,7 @@
       {name:'Carly Stinson', shuttles:41},
       {name:'Elise Boyd', shuttles:40},
       {name:'Sidney Nicholas', shuttles:40},
-      {name:'Alicia Rierbich', shuttles:40},
+      {name:'Alicia Riebech', shuttles:40},
       {name:'Nikki Miskovic', shuttles:40},
       {name:'Olivia Cruz', shuttles:40},
       {name:'Sophie Abbott', shuttles:40},
@@ -1770,7 +1848,7 @@
     return `hsla(166, 55%, ${16+t*16}%, 1)`;
   }
 
-  const JUMP_STATUS_THRESHOLD = 0.5; // inches -- matches the status threshold used in the OVR jump tracker
+  const JUMP_STATUS_THRESHOLD = 1; // inches -- matches the OVR jump tracker's Status threshold cell (P3)
 
   function jumpChronoList(){
     return [...jumpSessions].sort((a,b)=> new Date(a.date)-new Date(b.date));
@@ -1813,6 +1891,26 @@
       if(row && row.best!=null && (best===null || row.best>best)) best = row.best;
     });
     return best;
+  }
+
+  // Highest Best Jump recorded by ANYONE on the team, across every test on file
+  // (mirrors the OVR tracker's Team Record cell / column L "🏆 Team PR" flag).
+  function jumpTeamAllTimeBest(){
+    let best = null;
+    jumpSessions.forEach(js=>{
+      js.roster.forEach(r=>{
+        if(r.best!=null && (best===null || r.best>best)) best = r.best;
+      });
+    });
+    return best;
+  }
+
+  // Above/At/Below status vs. baseline, colored exactly like the OVR tracker's
+  // conditional formatting (green/blue/red) on the Status column.
+  function jumpStatusInfo(delta){
+    if(delta>=JUMP_STATUS_THRESHOLD) return {cls:'status-above', label:'Above'};
+    if(delta<=-JUMP_STATUS_THRESHOLD) return {cls:'status-below', label:'Below'};
+    return {cls:'status-at', label:'At'};
   }
 
   // Trend for a jump test row: preseason tests compare to the athlete's own running preseason
@@ -1877,7 +1975,7 @@
     let html = renderJumpOverview();
 
     html += `<p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:18px;margin:16px 0;color:var(--text);">
-      ${fullDate(js.date)} <span style="color:var(--text-dim);font-weight:500;font-size:14px;">&middot; ${js.label}${js.phase==='preseason'?' &middot; Preseason':''}</span>
+      ${fullDate(js.date)} <span style="color:var(--text-dim);font-weight:500;font-size:14px;">&middot; ${js.label}${js.phase==='preseason'?' &middot; Preseason':' &middot; In-Season'}</span>
     </p>`;
 
     const bests = js.roster.map(r=>r.best).filter(v=>v!=null);
@@ -1891,6 +1989,7 @@
       <div class="stat"><p class="stat-label">Status threshold</p><p class="stat-value" style="font-size:22px">&plusmn;${JUMP_STATUS_THRESHOLD}<span class="stat-unit">in</span></p></div>
     </div>`;
 
+    const teamAllTimeBest = jumpTeamAllTimeBest();
     const roster = js.roster.map(r=>{
       const trend = computeJumpTrend(r.name, js.id);
       return Object.assign({}, r, {trend, trendDelta: trend ? trend.delta : null, allTimeBest: jumpAllTimeBest(r.name)});
@@ -1912,27 +2011,30 @@
         <th data-key="j3" class="num ${key==='j3'?'sorted':''}">Jump 3</th>
         <th data-key="best" class="num ${key==='best'?'sorted':''}">Best (Day)</th>
         <th data-key="allTimeBest" class="num ${key==='allTimeBest'?'sorted':''}">Best (All-Time)</th>
-        <th data-key="trendDelta" class="num ${key==='trendDelta'?'sorted':''}">Trend</th>
+        <th data-key="trendDelta" class="num ${key==='trendDelta'?'sorted':''}">Status vs. Baseline</th>
       </tr></thead><tbody>`;
     roster.forEach((r,i)=>{
       let trendHtml = '<span class="trend-badge trend-new">new</span>';
       if(r.trend){
-        const cls = jumpStatusClass(r.trend.delta);
+        const info = jumpStatusInfo(r.trend.delta);
         const arrow = r.trend.delta>=0.05 ? '&#9650;' : (r.trend.delta<=-0.05 ? '&#9660;' : '&ndash;');
-        trendHtml = `<span class="trend-badge ${cls==='status-up'?'trend-good':(cls==='status-down'?'trend-bad':'trend-normal')}">${arrow} ${r.trend.delta>=0?'+':''}${r.trend.delta.toFixed(1)}"</span><div class="trend-basis">${r.trend.basis} &middot; ${r.trend.prevVal.toFixed(1)}"</div>`;
+        trendHtml = `<span class="status-badge ${info.cls}">${info.label} ${arrow} ${r.trend.delta>=0?'+':''}${r.trend.delta.toFixed(1)}"</span><div class="trend-basis">${r.trend.basis} &middot; ${r.trend.prevVal.toFixed(1)}"</div>`;
       }
       const isPR = r.best!=null && r.allTimeBest!=null && r.best>=r.allTimeBest;
-      html += `<tr><td><span class="rank">${i+1}</span>&nbsp; ${r.name}</td>
+      const isAboveNotPR = !isPR && r.trend && r.trend.delta>=JUMP_STATUS_THRESHOLD;
+      const isTeamPR = r.best!=null && teamAllTimeBest!=null && r.best>=teamAllTimeBest;
+      const bestCellStyle = isPR ? 'font-weight:700;color:var(--text);' : (isAboveNotPR ? 'font-weight:700;color:#7F6000;background:#FFD966;border-radius:5px;' : 'font-weight:700;color:var(--text);');
+      html += `<tr><td><span class="rank">${i+1}</span>&nbsp; ${r.name}${isTeamPR?' <span class="team-pr-flag" title="New team record -- highest jump on the entire team, any session">&#127942; Team PR</span>':''}</td>
         <td class="num mono">${r.j1!=null?r.j1.toFixed(1):'&mdash;'}</td>
         <td class="num mono">${r.j2!=null?r.j2.toFixed(1):'&mdash;'}</td>
         <td class="num mono">${r.j3!=null?r.j3.toFixed(1):'&mdash;'}</td>
-        <td class="num mono" style="font-weight:700;color:var(--text);">${r.best!=null?r.best.toFixed(1):'&mdash;'}${isPR?' <span style="color:var(--gold-text);" title="Personal record">&#9733;</span>':''}</td>
+        <td class="num mono" style="${bestCellStyle}">${r.best!=null?r.best.toFixed(1):'&mdash;'}${isPR?' <span style="color:var(--gold-text);" title="All-time PR -- ties or beats her best ever">&#9733;</span>':(isAboveNotPR?' <span title="Above baseline, not yet an all-time PR">&#9650;</span>':'')}</td>
         <td class="num mono" style="color:var(--text-dim);">${r.allTimeBest!=null?r.allTimeBest.toFixed(1):'&mdash;'}</td>
         <td class="num">${trendHtml}</td></tr>`;
     });
     html += `</tbody></table></div>`;
 
-    html += `<p class="footer-note">Best (Day) is the highest of the athlete's three attempts that day; Best (All-Time) is her highest recorded jump across every test on file, with &#9733; marking a day she matched or set it. Trend compares a preseason test to her own running preseason average up to that point (not just the single prior test); once in-season testing begins, trend switches to comparing against her frozen preseason baseline (average Best Jump across all preseason tests). &plusmn;${JUMP_STATUS_THRESHOLD}in is flagged as a rise or dip. Click a column header to sort.</p>`;
+    html += `<p class="footer-note">Best (Day) is the highest of the athlete's three attempts that day; Best (All-Time) is her highest recorded jump across every test on file, with &#9733; marking a day she matched or set it, and a gold cell marking a day she beat her baseline without setting an all-time PR. &#127942; Team PR marks the highest jump recorded by anyone on the team, any session. Trend compares a preseason test to her own running preseason average up to that point (not just the single prior test); once in-season testing begins, trend switches to comparing against her frozen preseason baseline (average Best Jump across all preseason tests). Status is Above/At/Below that baseline using a &plusmn;${JUMP_STATUS_THRESHOLD}in threshold, colored the same as the OVR tracker (green/blue/red). Click a column header to sort.</p>`;
 
     el.innerHTML = html;
 
@@ -2005,6 +2107,17 @@
     return yoyoToVO2max(a.shuttles);
   }
 
+  // Highest TRIMP an athlete has ever recorded, across every session on file (mirrors jumpAllTimeBest).
+  function trimpAllTimeBest(name){
+    const nameKey = name.trim().toLowerCase();
+    let best = null;
+    sessions.forEach(sess=>{
+      const row = sess.roster.find(r=>r.name.trim().toLowerCase()===nameKey);
+      if(row && row.trimp!=null && (best===null || row.trimp>best)) best = row.trimp;
+    });
+    return best;
+  }
+
   function getSeasonStats(name){
     const nameKey = name.trim().toLowerCase();
     const trimpVals = [], epocVals = [], moveVals = [];
@@ -2060,8 +2173,19 @@
     if(s.alerts && s.alerts.length){
       html += `<div class="alerts">`;
       s.alerts.forEach(a=>{
+        const detail = a.note ? a.note : `new max HR &middot; ${a.from} &rarr; <b>${a.to}</b> bpm`;
         html += `<div class="alert-chip"><span class="alert-dot"></span><span class="alert-name">${a.name}</span>
-          <span class="alert-delta">new max HR &middot; ${a.from} &rarr; <b>${a.to}</b> bpm</span></div>`;
+          <span class="alert-delta">${detail}</span></div>`;
+      });
+      html += `</div>`;
+    }
+
+    const prRoster = s.roster.filter(r=>r.trimp!=null && r.trimp>0 && r.trimp>=trimpAllTimeBest(r.name));
+    if(prRoster.length){
+      html += `<div class="alerts">`;
+      prRoster.forEach(r=>{
+        html += `<div class="pr-chip"><span class="pr-dot">&#9733;</span><span class="alert-name">${r.name}</span>
+          <span class="alert-delta">personal-record TRIMP &middot; <b>${r.trimp}</b></span></div>`;
       });
       html += `</div>`;
     }
@@ -2175,8 +2299,9 @@
         const arrow = pct>1 ? '&#9650;' : (pct<-1 ? '&#9660;' : '&ndash;');
         trendHtml = `<span class="trend-badge ${cls}" title="${basisLabel(r.trend.basis)}: ${Math.round(r.trend.prevTrimp)} TRIMP${r.trend.prevDate?` (${shortDate(r.trend.prevDate)})`:''}">${arrow} ${pct>0?'+':''}${pct.toFixed(0)}%</span><div class="trend-basis">${basisLabel(r.trend.basis)} &middot; ${Math.round(r.trend.prevTrimp)}</div>`;
       }
+      const isTrimpPR = r.trimp!=null && r.trimp>0 && r.trimp>=trimpAllTimeBest(r.name);
       html += `<tr><td><span class="rank">${i+1}</span>&nbsp; ${r.name}</td>
-        <td class="num"><span class="heatcell mono" style="background:${heatColor(r.trimp,minT,maxT,'trimp')}">${r.trimp}</span></td>
+        <td class="num"><span class="heatcell mono" style="background:${heatColor(r.trimp,minT,maxT,'trimp')}">${r.trimp}</span>${isTrimpPR?' <span style="color:var(--gold-text);" title="Personal record TRIMP">&#9733;</span>':''}</td>
         <td class="num mono">${r.ate.toFixed(1)}</td>
         <td class="num mono">${r.ante.toFixed(1)}</td>
         ${hasEpoc?`<td class="epoc-cell">${r.epoc!=null?r.epoc:'&mdash;'}</td>`:''}
